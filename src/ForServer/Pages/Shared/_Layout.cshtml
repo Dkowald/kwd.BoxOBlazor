@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="~/" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BagOBlazor - For Server</title>
+
+	<script src="~/_framework/blazor.server.js" defer></script>
+
+	@*Using asset from shared lib*@
+	<link href="_content/kwd.BoxOBlazor/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+	<link href="_content/kwd.BoxOBlazor/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+
+	<link href="~/css/site.min.css" rel="stylesheet" />
+	
+	<style>
+		#main-menu {
+			padding-inline-start: 0;
+			margin-block-start: 0;
+			margin-block-end: 0;
+		}
+	</style>
+	@RenderSection("Head", true)
+</head>
+<body style="display: flex; flex-direction: row; position: relative;">
+	<div class="sidebar">
+		<partial name="_Nav" />
+	</div>
+	<main class="main">
+		<div class="top-row px-4">
+			Razor hosting blazor.
+		</div>
+		<div class="content px-4">
+			@RenderBody()
+		</div>
+	</main>
+</body>
+</html>

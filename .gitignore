@@ -4,3 +4,6 @@
 /src/**/bin/
 
 /src/**/appsettings.*.json
+/src/**/*.user
+
+/src/ForDesk/wwwroot/_content/*

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "ESNext",
+    "module": "None",
+    "outDir": "../../../wwwroot/",
+    "outFile": "../../../wwwroot/util.js"
+  },
+  "include": [ "*.ts" ],
+  "compileOnSave": true
+}

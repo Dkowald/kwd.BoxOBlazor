@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using kwd.BoxOBlazor;
+using Microsoft.Extensions.DependencyInjection;
 
 using WebWindows.Blazor;
 
@@ -8,6 +9,7 @@ namespace ForDesk
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddScoped<JsProxy>();
 		}
 
 		public void Configure(DesktopApplicationBuilder app)

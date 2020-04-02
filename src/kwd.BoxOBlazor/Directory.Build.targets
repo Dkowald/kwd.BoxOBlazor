@@ -1,0 +1,24 @@
+<Project>
+	<ItemGroup>
+		<WebAsset Include="Web/img/*">
+			<Out>wwwroot/img/%(Filename)%(Extension)</Out>
+		</WebAsset>
+		
+		<WebAsset Include="Web/styles/*.css">
+			<Out>wwwroot/css/%(Filename)%(Extension)</Out>
+		</WebAsset>
+
+		<WebAsset Include="Web/css/bootstrap/*">
+			<Out>wwwroot/css/bootstrap/%(Filename)%(Extension)</Out>
+		</WebAsset>
+
+		<WebAsset Include="Web/css/open-iconic/**/**">
+			<Out>wwwroot/css/open-iconic/%(RecursiveDir)/%(Filename)%(Extension)</Out>
+		</WebAsset>
+	</ItemGroup>
+
+	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
+	        BeforeTargets="ResolveAssemblyReferences">
+		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
+	</Target>
+</Project>

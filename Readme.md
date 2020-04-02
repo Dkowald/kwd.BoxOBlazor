@@ -12,3 +12,5 @@ At this point in time:
 | ForBrowser | Blazor WebAssem | preview2 |
 | ForDesk    | WebWindow       | alpha    |
 
+This project is to explore development with blazor.
+Particularly intersted in developing design approaches for using brazor in production.

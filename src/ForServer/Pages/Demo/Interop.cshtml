@@ -1,0 +1,15 @@
+﻿@page
+@using ForServer.Pages.Demo
+@{}
+@section Head
+{
+	@*The interop js script*@
+	<script src="~/_content/kwd.BoxOBlazor/util.js" defer></script>
+}
+
+<h1>Demo interop with Javascript</h1>
+
+<p>
+	What is your name
+	<component type="typeof(NamePrompt)" render-mode="ServerPrerendered" />
+</p>

@@ -11,8 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForDesk", "ForDesk\ForDesk.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26DAB011-0D4F-48EA-A13C-6BED30EBA5CA}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\.gitignore = ..\..\.gitignore
-		..\..\Readme.md = ..\..\Readme.md
+		..\.gitignore = ..\.gitignore
+		..\Readme.md = ..\Readme.md
+		..\Todo.md = ..\Todo.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor", "kwd.BoxOBlazor\kwd.BoxOBlazor.csproj", "{F0451E9A-1E35-48B7-B723-1F4033F46820}"

@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text;
+
+using kwd.BoxOBlazor;
+
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,10 +13,16 @@ namespace ForBrowser
 		{
 			var builder = WebAssemblyHostBuilder.CreateDefault(args);
 			builder.RootComponents.Add<App>("app");
-
-			builder.Services.AddBaseAddressHttpClient();
-
+			
+			ConfigureServices(builder.Services);
+			
 			await builder.Build().RunAsync();
+		}
+
+		static void ConfigureServices(IServiceCollection services)
+		{
+			services.AddBaseAddressHttpClient();
+			services.AddScoped<JsProxy>();
 		}
 	}
 }

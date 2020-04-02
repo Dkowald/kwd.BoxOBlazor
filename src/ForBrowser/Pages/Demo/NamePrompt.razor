@@ -1,0 +1,27 @@
+﻿@using kwd.BoxOBlazor
+@inject JsProxy JsProxy
+
+@if (Name is null)
+{
+	<button @onclick="PromptName" type="button">Click to set name</button>
+}
+else
+{
+	<p>Hello @Name</p>
+	<button @onclick="PromptName" type="button">Click to change name</button>
+}
+
+@code {
+
+	private string Name { get; set; }
+
+	private async Task PromptName()
+	{
+		var newName = await JsProxy.Util.ShowPrompt("Enter name", Name);
+
+		if (newName != null)
+		{ Name = newName; }
+
+		StateHasChanged();
+	}
+}
