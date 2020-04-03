@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ForDesk": {
+      "commandName": "Project",
+      "workingDirectory": "./"
+    }
+  }
+}

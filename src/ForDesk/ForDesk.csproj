@@ -9,6 +9,16 @@
     <PackageReference Include="WebWindow.Blazor" Version="0.1.0-20200214.10" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--Dont copy to out folder.-->
+		<Content Remove="compilerconfig.json" />
+		<None Include="compilerconfig.json" />
+	</ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
   </ItemGroup>

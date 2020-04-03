@@ -1,23 +1,7 @@
 <Project>
 	<ItemGroup>
-		<WebAsset Include="Web/img/*">
-			<Out>wwwroot/img/%(Filename)%(Extension)</Out>
-		</WebAsset>
-
-		<WebAsset Include="Web/scripts/*.js">
-			<Out>wwwroot/scripts/%(Filename)%(Extension)</Out>
-		</WebAsset>
-
 		<WebAsset Include="Web/favicon.ico">
 			<Out>wwwroot/favicon.ico</Out>
-		</WebAsset>
-
-		<WebAsset Include="Web/css/bootstrap/*">
-			<Out>wwwroot/css/bootstrap/%(Filename)%(Extension)</Out>
-		</WebAsset>
-
-		<WebAsset Include="Web/css/open-iconic/**/**">
-			<Out>wwwroot/css/open-iconic/%(RecursiveDir)/%(Filename)%(Extension)</Out>
 		</WebAsset>
 	</ItemGroup>
 
@@ -25,4 +9,5 @@
 	        BeforeTargets="ResolveAssemblyReferences">
 		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
 	</Target>
+
 </Project>

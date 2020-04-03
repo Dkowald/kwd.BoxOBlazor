@@ -15,10 +15,22 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+	</ItemGroup>
+
+
+	<ItemGroup>
     <Content Update="Web\scripts\util\tsconfig.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+	<ItemGroup>
+		<!--Dont copy to out folder.-->
+		<Content Remove="compilerconfig.json" />
+		<None Include="compilerconfig.json" />
+	</ItemGroup>
+
 
 </Project>

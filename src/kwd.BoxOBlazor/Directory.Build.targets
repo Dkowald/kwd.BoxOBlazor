@@ -15,7 +15,17 @@
 		<WebAsset Include="Web/css/open-iconic/**/**">
 			<Out>wwwroot/css/open-iconic/%(RecursiveDir)/%(Filename)%(Extension)</Out>
 		</WebAsset>
+
+		<!--For source map support.-->
+		<WebAsset Include="Web/css/site.less" 
+		          Out="wwwroot/css/site.less" />
+			
+		<WebAsset Include="Web/css/site/**/**">
+			<Out>wwwroot/css/site/%(RecursiveDir)/%(Filename)%(Extension)</Out>
+		</WebAsset>
+
 	</ItemGroup>
+
 
 	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
 	        BeforeTargets="ResolveAssemblyReferences">
