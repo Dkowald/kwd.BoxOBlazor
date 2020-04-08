@@ -1,5 +1,8 @@
 using ForServer.Data;
+using ForServer.Services;
+
 using kwd.BoxOBlazor;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +21,13 @@ namespace ForServer
 		}
 		
 		public void ConfigureServices(IServiceCollection services)
-		{
+        {
+			//server timing events
+            services.AddSingleton<TimedCallback>()
+                .AddHostedService(ctx => ctx.GetRequiredService<TimedCallback>());
+
+            services.AddSingleton<IClock, DefaultClock>();
+
 			services.AddControllersWithViews();
 			services.AddRazorPages();
 
@@ -26,6 +35,8 @@ namespace ForServer
 
 			services.AddSingleton<WeatherForecastService>();
 
+            services.AddSingleton<AppState>();
+			
 			services.AddScoped<JsProxy>();
 		}
 

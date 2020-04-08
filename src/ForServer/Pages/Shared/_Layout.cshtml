@@ -12,15 +12,10 @@
 	<link href="_content/kwd.BoxOBlazor/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	<link href="_content/kwd.BoxOBlazor/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
 	<link href="_content/kwd.BoxOBlazor/css/site.css" rel="stylesheet" />
-
-	<style>
-		#main-menu {
-			padding-inline-start: 0;
-			margin-block-start: 0;
-			margin-block-end: 0;
-		}
-	</style>
-	@RenderSection("Head", true)
+	
+    <link href="css/forServer.css" rel="stylesheet" />
+    
+	@RenderSection("Head", false)
 </head>
 <body style="display: flex; flex-direction: row; position: relative;">
 	<div class="sidebar">

@@ -8,4 +8,6 @@
 
 /src/ForDesk/wwwroot/_content/*
 
+/src/ForServer/wwwroot/*
+
 /src/kwd.BoxOBlazor/wwwroot/*

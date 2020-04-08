@@ -3,6 +3,10 @@
 		<WebAsset Include="Web/favicon.ico">
 			<Out>wwwroot/favicon.ico</Out>
 		</WebAsset>
+
+    <WebAsset Include="Web/img/**/*">
+      <Out>wwwroot/img/%(RecursiveDir)/%(Filename)%(Extension)</Out>
+    </WebAsset>
 	</ItemGroup>
 
 	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
