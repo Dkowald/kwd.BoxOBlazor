@@ -1,6 +1,8 @@
 ﻿@page "/colorTool"
+@inject ILogger<ColorTool> Log;
 @using kwd.BoxOBlazor.Unit
 @using kwd.BoxOBlazor.Util
+@using Microsoft.Extensions.Logging
 
 @*
  # todo
@@ -51,7 +53,11 @@
 
     protected override void OnInitialized()
     {
-        if (Hex is null) Hex = "#FFFFFF";
+        if (Hex is null)
+        {
+            Log.LogInformation("Initalize with white");
+            Hex = "#FFFFFF";
+        }
 
         (Red, Green, Blue) = ColorHelper.HexToRgb(Hex);
         UpdateHSLFromRgb();
@@ -59,6 +65,7 @@
 
     protected void HexColorChanged(ChangeEventArgs args)
     {
+        Log.LogTrace("Color updtes via hex string");
         var txt = args.Value.ToString();
         (Red, Green, Blue) = ColorHelper.HexToRgb(txt);
 
@@ -67,6 +74,7 @@
 
     protected void RGBValueChanged(ChangeEventArgs args, string part)
     {
+        Log.LogTrace($"Color updated via RGB value {part}");
         var val = int.Parse(args.Value.ToString());
         if (val > 255) { val = 255; StateHasChanged(); }
         if (val < 0) { val = 0; StateHasChanged(); }
@@ -86,6 +94,7 @@
 
     protected void HSLChanged(ChangeEventArgs args, string part)
     {
+        Log.LogTrace("Color update via HSL value {part}", part);
         var val = args.Value.ToString();
         switch (part)
         {

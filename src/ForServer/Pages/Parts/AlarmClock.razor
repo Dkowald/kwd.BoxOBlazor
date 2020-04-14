@@ -1,4 +1,6 @@
 ﻿@inject AppState state;
+@inject ILogger<AlarmClock> log;
+@using Microsoft.Extensions.Logging
 @implements IDisposable
 <p>
     Current time : @Current
@@ -13,12 +15,14 @@
 
     protected override void OnInitialized()
     {
+        log.LogTrace("Attaching to UpTimeChanged event");
         state.UpTimeChanged += Refresh;
     }
 
     #region IDisposable
     public void Dispose()
     {
+        log.LogTrace("Detach UpTimeChanged event");
         state.UpTimeChanged -= Refresh;
     }
     #endregion

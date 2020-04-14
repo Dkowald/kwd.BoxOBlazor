@@ -7,23 +7,20 @@ namespace ForServer.Services
     /// </summary>
     public class AppState
     {
-        private readonly DateTime _start;
-
         public DateTime ServerTime;
         public TimeSpan UpTime;
-
         public event Action UpTimeChanged;
 
-        public AppState(TimedCallback alarmClock, IClock sysClock)
+        public AppState(TimedCallback timedCallbacks, IClock sysClock)
         {
-            _start = sysClock.Now;
+            var start = sysClock.Now;
 
             //Up time and clock.
-            alarmClock.Register(
+            timedCallbacks.Register(
                 () =>
                 {
                     ServerTime = sysClock.Now;
-                    UpTime = ServerTime - _start;
+                    UpTime = ServerTime - start;
                     OnUpTimeChanged();
                 },
                 TimeSpan.Zero, TimeSpan.FromSeconds(1));

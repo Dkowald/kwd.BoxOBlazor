@@ -1,0 +1,88 @@
+﻿@using Microsoft.Extensions.Logging
+@inject MemoryLogger memLogger
+@implements IDisposable
+
+<h3>Latest log entries</h3>
+<ol>
+    @foreach (var item in memLogger.Items)
+    {
+        <li>
+            [@item.Level]
+            <span>@item.Message</span>
+            {@item.Category}
+            @item.When.Date.ToShortDateString()
+            @item.When.ToShortTimeString()
+            
+        </li>
+    }
+</ol>
+
+<h3>Active filters</h3>
+<ol>
+    @foreach (var filter in memLogger.ActiveFilters)
+    {
+        <li> @filter.Prefix | @filter.Level | 
+            <button @onclick="(arg) => DoDelFilter(filter.Prefix)">
+                <span>&nbsp;</span>
+                <img class="oi oi-trash"/>
+            </button>
+            </li>
+    }
+    <li>
+        
+        <form @onsubmit="DoAddFiler">
+            <input type="text" name="Category" @bind="@LoggingFilter.Prefix"/>
+            <select name="Level" @bind="LoggingFilter.Level">
+                <option value="@LogLevel.Trace">@LogLevel.Trace</option>
+                <option value="@LogLevel.Debug">@LogLevel.Debug</option>
+                <option value="@LogLevel.Information">@LogLevel.Information</option>
+                <option value="@LogLevel.Warning">@LogLevel.Warning</option>
+                <option value="@LogLevel.Error">@LogLevel.Error</option>
+                <option value="@LogLevel.Critical">@LogLevel.Critical</option>
+                <option value="@LogLevel.None">@LogLevel.None</option>
+            </select>
+            <button type="submit" on>Add</button>
+        </form>
+    </li>
+</ol>
+
+@code {
+
+    public void Dispose()
+    {
+        memLogger.ItemsUpdated -= OnMemoryLoggerUpdates;
+        memLogger.FiltersUpdated -= OnMemoryLoggerUpdates;
+    }
+
+    protected override void OnInitialized()
+    {
+        memLogger.ItemsUpdated += OnMemoryLoggerUpdates;
+
+        memLogger.FiltersUpdated += OnMemoryLoggerUpdates;
+    }
+
+    public class AddLoggingFilterModel
+    {
+        public string Prefix { get; set; }
+        public LogLevel Level { get; set; }
+
+        public bool IsSelected(LogLevel level)
+            => level == Level;
+    }
+
+    public AddLoggingFilterModel LoggingFilter = new AddLoggingFilterModel();
+
+    public void DoAddFiler(EventArgs _)
+    {
+        memLogger.AddFilter(LoggingFilter.Prefix, LoggingFilter.Level);
+    }
+
+    public void DoDelFilter(string name)
+    {
+        memLogger.RemoveFilter(name);
+    }
+
+    private async void OnMemoryLoggerUpdates()
+    { await InvokeAsync(StateHasChanged); }
+}
+

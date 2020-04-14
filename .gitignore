@@ -9,5 +9,6 @@
 /src/ForDesk/wwwroot/_content/*
 
 /src/ForServer/wwwroot/*
+/src/ForServer/App_Data/*
 
 /src/kwd.BoxOBlazor/wwwroot/*

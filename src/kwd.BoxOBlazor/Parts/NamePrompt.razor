@@ -1,5 +1,6 @@
-﻿@using kwd.BoxOBlazor
+﻿@using Microsoft.Extensions.Logging
 @inject JsProxy JsProxy
+@inject ILogger<NamePrompt> Log;
 
 @if (Name is null)
 {
@@ -17,6 +18,8 @@ else
 
 	private async Task PromptName()
 	{
+		Console.WriteLine("Calling js via interop");
+		Log.LogTrace("Calling js via interop");
 		var newName = await JsProxy.Util.ShowPrompt("Enter name", Name);
 
 		if (newName != null)

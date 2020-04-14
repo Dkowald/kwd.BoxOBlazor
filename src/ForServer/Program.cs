@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace ForServer
 {
-	public class Program
+	public static class Program
 	{
 		public static void Main(string[] args)
 		{
@@ -12,7 +12,7 @@ namespace ForServer
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStaticWebAssets();
 					webBuilder.UseStartup<Startup>();

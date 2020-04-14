@@ -9,6 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazor.Extensions.Logging" Version="1.0.0" />
+    <PackageReference Include="NReco.Logging.File" Version="1.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
   </ItemGroup>
 
@@ -17,5 +22,9 @@
 		<Content Remove="compilerconfig.json" />
 		<None Include="compilerconfig.json" />
 	</ItemGroup>
-	
+
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
+	</ItemGroup>
+
 </Project>

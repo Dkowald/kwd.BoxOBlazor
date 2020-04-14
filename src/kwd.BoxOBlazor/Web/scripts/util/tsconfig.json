@@ -4,6 +4,7 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
+    "inlineSources": true,
     "target": "ESNext",
     "module": "None",
     "outDir": "../../../wwwroot/",

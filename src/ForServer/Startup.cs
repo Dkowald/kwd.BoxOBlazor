@@ -1,5 +1,6 @@
 using ForServer.Data;
 using ForServer.Services;
+using ForServer.Services.Logging;
 
 using kwd.BoxOBlazor;
 
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace ForServer
 {
@@ -22,6 +24,18 @@ namespace ForServer
 		
 		public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddLogging(cfg =>
+                {
+					var provider = new MemoryLogger(new DefaultClock());
+
+                    cfg.Services.AddSingleton(provider);
+
+                    cfg.AddProvider(provider);
+                    cfg.AddFile(
+                        _configuration.GetSection("Logging"));
+            });
+
 			//server timing events
             services.AddSingleton<TimedCallback>()
                 .AddHostedService(ctx => ctx.GetRequiredService<TimedCallback>());

@@ -1,5 +1,10 @@
 ﻿@page
+@using Microsoft.Extensions.Logging
+@inject ILoggerFactory Logger
 @{
+    var log = Logger.CreateLogger("ForServer.Pages.Demo.ServerEvents");
+
+    log.LogInformation("Showing Clock demo");
 }
 <h1>Demo server-generated events in UI.</h1>
 
@@ -7,4 +12,3 @@
     A simple clock.
 </p>
 <component type="typeof(AlarmClock)" render-mode="ServerPrerendered" />
-

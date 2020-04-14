@@ -1,0 +1,12 @@
+﻿@page
+@using Microsoft.Extensions.Logging
+@inject ILoggerFactory Logger
+<h1>Demo logging </h1>
+
+<component type="@typeof(MemoryLogViewer)" render-mode="ServerPrerendered" />
+
+@{
+    var log = Logger.CreateLogger("ForServer.Pages.Demo.LogView");
+
+    log.LogInformation("Showing Clock demo");
+}

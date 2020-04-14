@@ -13,4 +13,4 @@ At this point in time:
 | ForDesk    | WebWindow       | alpha    |
 
 This project is to explore development with blazor.
-Particularly intersted in developing design approaches for using brazor in production.
+Particularly interested in developing design approaches for using brazor in production.

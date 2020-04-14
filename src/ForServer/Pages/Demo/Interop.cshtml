@@ -1,8 +1,16 @@
 ﻿@page
+@using Microsoft.Extensions.Logging
+@inject ILoggerFactory Logger
 @section Head
 {
 	@*The interop js script*@
 	<script src="~/_content/kwd.BoxOBlazor/util.js" defer></script>
+}
+
+@{
+    var log = Logger.CreateLogger("ForServer.Pages.Demo.Interop");
+
+	log.LogInformation("Showing Interop demo");
 }
 
 <h1>Demo interop with Javascript</h1>
