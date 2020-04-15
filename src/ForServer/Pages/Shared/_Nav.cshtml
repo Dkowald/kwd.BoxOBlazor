@@ -1,4 +1,7 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@{
+    var imgLog = "_content/kwd.BoxOBlazor/img/log.svg";
+}
+<div class="top-row pl-4 navbar navbar-dark">
 	<a class="navbar-brand" href="">ForServer</a>
 </div>
 
@@ -17,7 +20,12 @@
                 JS Interop
             </a>
         </li>
-
+        <li class="nav-item px-3">
+            <a href="~/Demo/ColorTool" class="nav-link">
+                <span class="oi oi-fire" aria-hidden="true"></span>
+                Color tool
+            </a>
+        </li>
         <li class="nav-item px-3">
             <a href="~/Demo/ServerEvents" class="nav-link">
                 <div class="oi linkIcon">
@@ -29,7 +37,7 @@
         <li class="nav-item px-3">
             <a href="~/Demo/LogView" class="nav-link">
                 <div class="oi linkIcon">
-                    <img class="icon" src="img/log.svg" aria-hidden="true" />
+                    <img class="icon" src="@imgLog" aria-hidden="true" />
                 </div>
                 Log viewer
             </a>

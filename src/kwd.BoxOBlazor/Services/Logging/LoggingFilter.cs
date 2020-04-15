@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace ForServer.Services.Logging
+namespace kwd.BoxOBlazor.Services.Logging
 {
     public class LoggingFilter
     {

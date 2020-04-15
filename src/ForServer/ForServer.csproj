@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.Extensions.Logging" Version="1.0.0" />
     <PackageReference Include="NReco.Logging.File" Version="1.0.5" />
   </ItemGroup>
 
@@ -24,6 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="App_Data\" />
 	  <Folder Include="Controllers\" />
 	</ItemGroup>
 

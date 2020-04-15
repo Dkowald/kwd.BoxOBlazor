@@ -8,6 +8,10 @@
 			<Out>wwwroot/scripts/%(Filename)%(Extension)</Out>
 		</WebAsset>
 
+    <WebAsset Include="appsettings.json;appsettings.*.json">
+      <Out>wwwroot/%(Filename)%(Extension)</Out>
+    </WebAsset>
+
 	</ItemGroup>
 
 	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 

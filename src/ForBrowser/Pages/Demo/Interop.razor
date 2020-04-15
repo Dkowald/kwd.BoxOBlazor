@@ -1,10 +1,17 @@
 ﻿@page "/demo/interop"
+@inject ILogger<Interop> log
+
 <h1>Demo interop with Javascript</h1>
 
 <p>
-	What is your name
-	<NamePrompt />
+    What is your name
+    <NamePrompt />
 </p>
 @code {
+    protected override Task OnInitializedAsync()
+    {
+        log.LogDebug("Start Interop demo");
 
+        return base.OnInitializedAsync();
+    }
 }

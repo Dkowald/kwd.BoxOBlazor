@@ -1,9 +1,8 @@
 using ForServer.Data;
 using ForServer.Services;
-using ForServer.Services.Logging;
-
 using kwd.BoxOBlazor;
-
+using kwd.BoxOBlazor.Services;
+using kwd.BoxOBlazor.Services.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +27,7 @@ namespace ForServer
                 .AddLogging(cfg =>
                 {
 					var provider = new MemoryLogger(new DefaultClock());
-
+					
                     cfg.Services.AddSingleton(provider);
 
                     cfg.AddProvider(provider);

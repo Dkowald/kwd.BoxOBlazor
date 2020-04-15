@@ -1,0 +1,155 @@
+﻿@using kwd.BoxOBlazor.Unit;
+@using kwd.BoxOBlazor.Util;
+@using Microsoft.Extensions.Logging
+@inject ILogger<ColorPicker> Log;
+@*
+    # todo
+       Use colored slider bar(s) for values.
+       Save current color to browser storage.
+       Move to component; and share on other platforms.
+       Use timer to trigger data update without need to blur.
+*@
+<p style="background-color: @Hex; color: @Contrast()">Color: @Hex</p>
+<p>
+    Hex:<input value="@Hex" @onchange="HexColorChanged" />
+</p>
+
+<p>
+    RGB:
+    <input type="number" max="255" min="0" name="@nameof(Red)" value="@Red"
+           @onchange="@(e => RGBValueChanged(e, nameof(Red)))" />
+    / <input type="number" max="255" min="0" name="@nameof(Green)" value="@Green"
+             @onchange="@(e => RGBValueChanged(e, nameof(Green)))" />
+    / <input type="number" max="255" min="0" name="@nameof(Blue)" value="@Blue"
+             @onchange="@(e => RGBValueChanged(e, nameof(Blue)))" />
+</p>
+<p>
+    HSL:
+    <input type="number" min="0" max="359" name="@nameof(Hue)" value="@Hue"
+           @onchange="@(e => HSLChanged(e, nameof(Hue)))" />
+    / <input type="number" min="0" max="100" name="@nameof(Saturation)" value="@Saturation"
+             @onchange="@(e => HSLChanged(e, nameof(Saturation)))" />%
+    / <input type="number" min="0" max="100" name="@nameof(Lightness)" value="@Lightness"
+             @onchange="@(e => HSLChanged(e, nameof(Lightness)))" />%
+</p>
+
+@code {
+
+    private string Hex;
+
+    private byte Red;
+    private byte Green;
+    private byte Blue;
+
+    private int Hue;
+    private Percent Saturation;
+    private Percent Lightness;
+
+    protected override void OnInitialized()
+    {
+        if (Hex is null)
+        {
+            Log.LogInformation("Initalize with white");
+            Hex = "#FFFFFF";
+        }
+
+        (Red, Green, Blue) = ColorHelper.HexToRgb(Hex);
+        UpdateHSLFromRgb();
+    }
+
+    protected void HexColorChanged(ChangeEventArgs args)
+    {
+        Log.LogTrace("Color updtes via hex string");
+        var txt = args.Value.ToString();
+        (Red, Green, Blue) = ColorHelper.HexToRgb(txt);
+
+        UpdateHSLFromRgb();
+    }
+
+    protected void RGBValueChanged(ChangeEventArgs args, string part)
+    {
+        Log.LogTrace($"Color updated via RGB value {part}");
+        var val = int.Parse(args.Value.ToString());
+        if (val > 255) { val = 255; StateHasChanged(); }
+        if (val < 0) { val = 0; StateHasChanged(); }
+
+        switch (part)
+        {
+            case nameof(Red): Red = (byte)val; break;
+            case nameof(Green): Green = (byte)val; break;
+            case nameof(Blue): Blue = (byte)val; break;
+            default: throw new Exception("Unexpected part");
+        }
+
+        UpdateHSLFromRgb();
+
+        Hex = ColorHelper.RGBToHex(Red, Green, Blue);
+    }
+
+    protected void HSLChanged(ChangeEventArgs args, string part)
+    {
+        Log.LogTrace("Color update via HSL value {part}", part);
+        var val = args.Value.ToString();
+        switch (part)
+        {
+            case nameof(Hue):
+                Hue = ReadDegree(val); break;
+            case nameof(Saturation):
+                Saturation = ReadPercent(val);
+                break;
+            case nameof(Lightness):
+                Lightness = ReadPercent(val);
+                break;
+            default: throw new Exception("Unexpected part for hsl");
+        }
+
+        (Red, Green, Blue) =
+            ColorHelper.HSLToRGB(Hue, Saturation.Value / 100, Lightness.Value / 100);
+
+        Hex = ColorHelper.RGBToHex(Red, Green, Blue);
+    }
+
+    private Percent ReadPercent(string txtValue)
+    {
+        var val = float.Parse(txtValue) * 100;
+        if (val < 0)
+        { val = 0; }
+        if (val > 10000)
+        { val = 10000; }
+
+        return new Percent(val / 100);
+    }
+
+    private int ReadDegree(string txtValue)
+    {
+        var val = int.Parse(txtValue);
+        if (val < 0)
+        { val = 0; }
+        if (val > 359)
+        { val = 359; }
+
+        return val;
+    }
+
+    private string Contrast()
+    {
+        if (Lightness.Value > 50)
+            return "black";
+
+        return "white";
+    }
+
+    private void UpdateHSLFromRgb()
+    {
+        var hsl = ColorHelper.RGBToHSL(Red, Green, Blue);
+
+        Hue = hsl.Hue;
+        Saturation = new Percent(hsl.Saturation * 100);
+        Lightness = new Percent(hsl.Lightness * 100);
+    }
+
+    /* Other tools
+    * https://www.w3schools.com/colors/colors_hsl.asp    *
+    */
+}
+

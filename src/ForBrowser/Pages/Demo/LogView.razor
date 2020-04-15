@@ -1,0 +1,40 @@
+﻿@page "/demo/LogView"
+@using Microsoft.Extensions.Logging;
+@inject ILogger<LogView> Log;
+<h1>Demo logging</h1>
+
+<MemoryLogViewer />
+
+<section>
+    Click to create
+    <button @onclick="Logit">log entries</button>.
+</section>
+
+<section>
+    <hr/>
+    <header>
+        <h3>Notes</h3>
+    </header>
+    <p>
+        Logging not working at this stage.
+        <ul>
+            <li>Not sure how it should add to the host.</li>
+            <li>Need to work on using config with logging.</li>
+        </ul>
+    </p>
+</section>
+@code {
+    protected override void OnInitialized()
+    {
+        Log.LogInformation("Showing Log view demo");
+    }
+
+    private void Logit()
+    {
+        Console.WriteLine("test generate different log levels");
+
+        Log.LogWarning("warning log entry");
+        Log.LogInformation("info log entry");
+        Log.LogDebug("debug log entry");
+    }
+}

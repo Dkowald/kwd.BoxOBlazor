@@ -1,0 +1,37 @@
+﻿@inject AppState state;
+@inject ILogger<AlarmClock> log;
+@using Microsoft.Extensions.Logging
+@implements IDisposable
+<p>
+    Current time : @Current
+</p>
+<p>
+    Browser app up-time : @Uptime
+</p>
+
+@code {
+    private string Current;
+    private string Uptime;
+
+    protected override void OnInitialized()
+    {
+        log.LogTrace("Attaching to UpTimeChanged event");
+        state.UpTimeChanged += Refresh;
+    }
+
+    #region IDisposable
+    public void Dispose()
+    {
+        log.LogTrace("Detach UpTimeChanged event");
+        state.UpTimeChanged -= Refresh;
+    }
+    #endregion
+
+    private void Refresh()
+    {
+        Current = state.ServerTime.ToString();
+        Uptime = state.UpTime.ToString();
+    //ignoring task result. todo: consider how to log an error.
+        InvokeAsync(StateHasChanged);
+    }
+}

@@ -1,18 +1,16 @@
 ﻿using System;
+using ForBrowser.Services;
 using kwd.BoxOBlazor.Services;
 
-namespace ForServer.Services
+namespace ForBrowser.Model
 {
-    /// <summary>
-    /// Application state model.
-    /// </summary>
     public class AppState
     {
         public DateTime ServerTime;
         public TimeSpan UpTime;
         public event Action UpTimeChanged;
 
-        public AppState(TimedCallback timedCallbacks, IClock sysClock)
+        public AppState(UITimer timedCallbacks, IClock sysClock)
         {
             var start = sysClock.Now;
 

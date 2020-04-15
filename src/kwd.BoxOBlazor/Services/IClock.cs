@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace ForServer.Services
+namespace kwd.BoxOBlazor.Services
 {
     public interface IClock
     {
-        public DateTime Now { get; }
+        DateTime Now { get; }
     }
 
     public class DefaultClock : IClock

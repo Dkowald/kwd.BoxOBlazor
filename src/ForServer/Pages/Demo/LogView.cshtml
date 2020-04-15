@@ -1,12 +1,14 @@
 ﻿@page
 @using Microsoft.Extensions.Logging
 @inject ILoggerFactory Logger
+
 <h1>Demo logging </h1>
 
 <component type="@typeof(MemoryLogViewer)" render-mode="ServerPrerendered" />
 
 @{
+    //cshtml: class not part of assembly; manually get category.
     var log = Logger.CreateLogger("ForServer.Pages.Demo.LogView");
 
-    log.LogInformation("Showing Clock demo");
+    log.LogInformation("Showing Logging demo");
 }
