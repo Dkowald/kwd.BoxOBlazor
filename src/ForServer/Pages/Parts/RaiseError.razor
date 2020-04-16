@@ -1,0 +1,13 @@
+﻿<h3>RaiseError</h3>
+<p>
+    Click 
+    <button @onclick="OnRaiseError">this</button>
+    to cause a faital exception.
+</p>
+
+<div></div>
+
+@code {
+    protected void OnRaiseError()
+        => throw new Exception("Raise unexpected error");
+}

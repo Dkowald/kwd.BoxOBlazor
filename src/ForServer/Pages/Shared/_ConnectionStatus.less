@@ -1,0 +1,45 @@
+﻿@back-color: aquamarine ;
+
+#components-reconnect-modal {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    text-align: center;
+    opacity: .8;
+    background-color: @back-color;
+
+    &.components-reconnect-hide,
+    &.components-reconnect-show,
+    &.components-reconnect-failed,
+    &.components-reconnect-rejected {
+        display: block;
+    }
+
+    .status {
+        display: none;
+        padding: 2em;
+        font-weight: bolder;
+        font-size: larger;
+        background-color: @back-color;
+    }
+
+    &.components-reconnect-hide .components-reconnect-hide {
+        display: block;
+    }
+
+    &.components-reconnect-show .components-reconnect-show {
+        display: block;
+    }
+
+    &.components-reconnect-failed .components-reconnect-failed {
+        display: block;
+    }
+
+    &.components-reconnect-rejected .components-reconnect-rejected {
+        display: block;
+    }
+}

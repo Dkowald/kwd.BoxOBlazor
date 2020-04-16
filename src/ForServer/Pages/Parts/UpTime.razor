@@ -1,12 +1,12 @@
 ﻿@inject AppState state;
-@inject ILogger<AlarmClock> log;
+@inject ILogger<UpTime> log;
 @using Microsoft.Extensions.Logging
 @implements IDisposable
 <p>
     Current time : @Current
 </p>
 <p>
-    Browser app up-time : @Uptime
+    Server up-time : @Uptime 
 </p>
 
 @code {
@@ -31,7 +31,7 @@
     {
         Current = state.ServerTime.ToString();
         Uptime = state.UpTime.ToString();
-    //ignoring task result. todo: consider how to log an error.
+        //ignoring task result. todo: consider how to log an error.
         InvokeAsync(StateHasChanged);
     }
 }

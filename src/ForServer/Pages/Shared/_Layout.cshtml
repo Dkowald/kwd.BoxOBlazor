@@ -18,16 +18,18 @@
 	@RenderSection("Head", false)
 </head>
 <body style="display: flex; flex-direction: row; position: relative;">
-	<div class="sidebar">
-		<partial name="_Nav" />
-	</div>
-	<main class="main">
-		<div class="top-row px-4">
-			Razor hosting blazor.
-		</div>
-		<div class="content px-4">
-			@RenderBody()
-		</div>
-	</main>
+<partial name="_ConnectionStatus"/>
+
+<div class="sidebar">
+    <partial name="_Nav"/>
+</div>
+<main class="main">
+    <div class="top-row px-4">
+        Razor hosting blazor.
+    </div>
+    <div class="content px-4">
+        @RenderBody()
+    </div>
+</main>
 </body>
 </html>

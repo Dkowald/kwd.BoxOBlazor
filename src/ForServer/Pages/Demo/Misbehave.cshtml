@@ -1,0 +1,13 @@
+﻿@page
+@using ForServer.Pages.Parts;
+
+<h1>Demo page to generate errors</h1>
+<p>I aim to misbehave</p>
+
+<component type="@typeof(RaiseError)" render-mode="ServerPrerendered"/>
+
+<p>
+    <a href="nowhere">Click</a> to go no-where.
+</p>
+
+<partial name="Shared/_CircuitError"/>

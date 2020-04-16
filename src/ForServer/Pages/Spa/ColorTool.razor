@@ -1,4 +1,4 @@
-﻿@page "/demo/ColorTool"
+﻿@page "/spa/ColorTool"
 @using Microsoft.Extensions.Logging;
 @inject ILogger<ColorTool> Log;
 <h3>ColorTool</h3>
@@ -7,6 +7,5 @@
 <ColorPicker />
 
 @code {
-
-
+        public const string Path = "/spa/ColorTool";
 }

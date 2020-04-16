@@ -1,0 +1,22 @@
+﻿@{}
+<div id="components-reconnect-modal">
+    <p class="status components-reconnect-hide">
+        All good.
+    </p>
+    <p class="status components-reconnect-show">
+        One moment... attempting server reconnect.
+    </p>
+    <p class="status components-reconnect-failed">
+        Auto re-connect failed.
+        Click
+        <a href="javascript:void(0);" onclick="window.Blazor.reconnect()">here</a>
+        to try again manually.
+    </p>
+    <p class="status components-reconnect-rejected">
+        Reconnect failed.
+        The server may have had a problem.
+        Click
+        <a href="javascript:void(0);" onclick="location.reload();">here</a>
+        to reload page.
+    </p>
+</div>

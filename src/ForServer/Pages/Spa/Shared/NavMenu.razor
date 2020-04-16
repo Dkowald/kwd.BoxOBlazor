@@ -1,0 +1,77 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+	<a class="navbar-brand" href="/">ForServer</a>
+	<button class="navbar-toggler" @onclick="ToggleNavMenu">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="demo/">
+                <span class="oi oi-loop" aria-hidden="true"></span>
+                Blazor in Razor
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@Interop.Path">
+                <span class="oi oi-audio-spectrum" aria-hidden="true"></span>
+                JS Interop
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@ColorTool.Path">
+                <span class="oi oi-fire" aria-hidden="true"></span>
+                Color tool
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@AlarmClock.Path">
+                <div class="oi linkIcon">
+                    <img class="icon" src="img/alarmClock.svg" aria-hidden="true" />
+                </div>
+                Alarm clock
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@LogView.Path">
+                <div class="oi linkIcon">
+                    <img class="icon" src="img/log.svg" aria-hidden="true" />
+                </div>
+                Log View
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="spa/counter/">
+                <span class="oi oi-account-login" aria-hidden="true"></span>
+                Counter
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@FetchData.Path">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+@code {
+	private bool collapseNavMenu = true;
+
+	private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+	private void ToggleNavMenu()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+}

@@ -1,5 +1,4 @@
-﻿@page "/fetchdata"
-
+﻿@page "/spa/FetchData"
 @using ForServer.Data
 @inject WeatherForecastService ForecastService
 
@@ -37,6 +36,8 @@ else
 }
 
 @code {
+        public const string Path = "/spa/FetchData";
+
     private WeatherForecast[] forecasts;
 
     protected override async Task OnInitializedAsync()
