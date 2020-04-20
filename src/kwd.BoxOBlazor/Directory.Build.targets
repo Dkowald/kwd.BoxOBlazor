@@ -26,9 +26,20 @@
 
 	</ItemGroup>
 
-
-	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
-	        BeforeTargets="ResolveAssemblyReferences">
+  <Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
+          BeforeTargets="ResolveAssemblyReferences">
 		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
 	</Target>
+  
+  <Target Name="WebAssets_Clean" AfterTargets="Clean">
+		<!--Note : -->
+		<!--Other build prcesses will auto-magic add files straight after clean-->
+    <ItemGroup>
+      <wwwFiles Include="wwwroot/**/*" />
+    </ItemGroup>
+
+    <Delete Files="@(wwwFiles)" />
+    <RemoveDir Directories="wwwroot/" />
+  </Target>
+
 </Project>

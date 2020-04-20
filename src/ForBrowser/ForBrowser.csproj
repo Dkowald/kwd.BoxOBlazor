@@ -16,6 +16,10 @@
 		<PackageReference Include="BuildWebCompiler" Version="1.12.405" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.3" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.3" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.8.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>

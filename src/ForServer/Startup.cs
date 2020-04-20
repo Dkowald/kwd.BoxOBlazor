@@ -1,10 +1,15 @@
+using System.Linq;
+
 using ForServer.Data;
 using ForServer.Services;
+
 using kwd.BoxOBlazor;
 using kwd.BoxOBlazor.Services;
 using kwd.BoxOBlazor.Services.Logging;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -55,6 +60,19 @@ namespace ForServer
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+            app.Use((context, next) =>
+            {
+                if (context.Request.Headers.TryGetValue("X-Forwarded-PathBase", out var pathBases))
+                {
+                    context.Request.PathBase = pathBases.First();
+                }
+                return next();
+            });
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

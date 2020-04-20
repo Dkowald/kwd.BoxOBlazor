@@ -37,5 +37,9 @@
 	  <WebAsset Remove="Web\img\log.svg" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <WebAsset Remove="Web\css\site\circuitError.less" />
+	</ItemGroup>
+
 
 </Project>
