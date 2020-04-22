@@ -19,7 +19,9 @@
 	<ItemGroup>
 		<!--Dont copy to out folder.-->
 		<Content Remove="compilerconfig.json" />
-		<None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json" />
+		<Content Remove="wwwroot\appsettings.Development.json" />
+    <None Include="wwwroot\appsettings.Development.json" />
 	</ItemGroup>
 
   <ItemGroup>

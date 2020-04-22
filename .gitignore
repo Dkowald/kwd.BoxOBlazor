@@ -8,13 +8,14 @@
 
 /src/**/.config/
 
-/src/ForDesk/wwwroot/_content/*
+/src/kwd.BoxOBlazor/wwwroot/*
+/src/kwd.BoxOBlazor/Web/scripts/util/*.js
+/src/kwd.BoxOBlazor/Web/scripts/util/*.js.map
 
 /src/ForServer/wwwroot/*
 /src/ForServer/App_Data/*
 /src/ForServer/Properties/PublishProfiles/
 
+/src/ForBrowser/wwwroot/*
 
-/src/kwd.BoxOBlazor/wwwroot/*
-/src/kwd.BoxOBlazor/Web/scripts/util/*.js
-/src/kwd.BoxOBlazor/Web/scripts/util/*.js.map
+/src/ForDesk/wwwroot/_content/*

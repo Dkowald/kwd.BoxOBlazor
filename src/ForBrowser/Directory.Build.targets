@@ -1,18 +1,22 @@
 <Project>
 	<ItemGroup>
-		<WebAsset Include="Web/img/*">
-			<Out>wwwroot/img/%(Filename)%(Extension)</Out>
-		</WebAsset>
+    <WebAsset Include="Web/index.html">
+      <Out>wwwroot/index.html</Out>
+    </WebAsset>
 
-		<WebAsset Include="Web/scripts/*.js">
-			<Out>wwwroot/scripts/%(Filename)%(Extension)</Out>
-		</WebAsset>
+    <WebAsset Include="Web/favicon.*">
+      <Out>wwwroot/%(Filename)%(Extension)</Out>
+    </WebAsset>
 
     <WebAsset Include="appsettings.json;appsettings.*.json">
       <Out>wwwroot/%(Filename)%(Extension)</Out>
     </WebAsset>
 
-	</ItemGroup>
+    <WebAsset Include="Web/sample-data/*.*">
+      <Out>wwwroot/sample-data/%(Filename)%(Extension)</Out>
+    </WebAsset>
+
+  </ItemGroup>
 
 	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
 	        BeforeTargets="ResolveAssemblyReferences">
