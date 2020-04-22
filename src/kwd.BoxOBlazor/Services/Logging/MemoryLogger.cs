@@ -46,10 +46,7 @@ namespace kwd.BoxOBlazor.Services.Logging
             _items = new List<LogEntry>(capacity);
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose(){}
 
         public ILogger CreateLogger(string categoryName)
             => new Logger(this, categoryName);

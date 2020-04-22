@@ -1,3 +1,5 @@
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using ForBrowser.Model;
@@ -19,8 +21,19 @@ namespace ForBrowser
 		{
 			var builder = WebAssemblyHostBuilder.CreateDefault(args);
 			builder.RootComponents.Add<App>("app");
-			
-			ConfigureServices(builder.Services);
+
+            builder.Services.AddSingleton(new HttpClient
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
+
+            var memLog = new MemoryLogger(new DefaultClock());
+            builder.Services.AddSingleton(memLog);
+            builder.Logging
+                .SetMinimumLevel(LogLevel.Information)
+                .AddProvider(memLog);
+
+            ConfigureServices(builder.Services);
             
 			await builder.Build()
                 .RunAsync();
@@ -37,21 +50,7 @@ namespace ForBrowser
 
             SiteConfig.Register(services);
 
-            services.AddLogging(cfg =>
-            {
-                //console logging. 
-                // (console mapped to browser console)
-                cfg.AddFilter(null, LogLevel.Information)
-                    .AddConsole();
-
-                var provider = new MemoryLogger(new DefaultClock());
-                cfg.Services.AddSingleton(provider);
-                cfg.AddProvider(provider);
-            });
-	
-			services.AddBaseAddressHttpClient();
-
-			services.AddScoped<JsProxy>();
+            services.AddScoped<JsProxy>();
         }
     }
 }

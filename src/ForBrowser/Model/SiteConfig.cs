@@ -13,7 +13,7 @@ namespace ForBrowser.Model
         /// </remarks>
         public static IServiceCollection Register(IServiceCollection svc)
         {
-            svc.AddScoped<SiteConfig>(ctx =>
+            svc.AddScoped(ctx =>
             {
                 var cfg = ctx.GetRequiredService<IConfiguration>();
 
