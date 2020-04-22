@@ -1,6 +1,7 @@
 using System.Linq;
 
 using ForServer.Data;
+using ForServer.Model;
 using ForServer.Services;
 
 using kwd.BoxOBlazor;
@@ -39,6 +40,10 @@ namespace ForServer
                     cfg.AddFile(
                         _configuration.GetSection("Logging"));
             });
+
+            services.AddOptions()
+                .Configure<SiteConfig>(
+                    _configuration.GetSection(nameof(SiteConfig)));
 
 			//server timing events
             services.AddSingleton<TimedCallback>()

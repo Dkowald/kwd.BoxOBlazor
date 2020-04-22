@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
+
 using ForBrowser.Model;
 using ForBrowser.Services;
+
 using kwd.BoxOBlazor;
 using kwd.BoxOBlazor.Services;
 using kwd.BoxOBlazor.Services.Logging;
@@ -19,8 +21,9 @@ namespace ForBrowser
 			builder.RootComponents.Add<App>("app");
 			
 			ConfigureServices(builder.Services);
-
-			await builder.Build().RunAsync();
+            
+			await builder.Build()
+                .RunAsync();
 		}
 
 		static void ConfigureServices(IServiceCollection services)
@@ -29,10 +32,11 @@ namespace ForBrowser
                 .AddSingleton<ServerAssets>();
 
             services.AddScoped<AppState>();
+
             services.AddSingleton<UITimer>();
 
-            //todo: can i use option pattern for config data?
-            
+            SiteConfig.Register(services);
+
             services.AddLogging(cfg =>
             {
                 //console logging. 

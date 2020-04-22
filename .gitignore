@@ -6,12 +6,14 @@
 /src/**/appsettings.*.json
 /src/**/*.user
 
+/src/**/.config/
+
 /src/ForDesk/wwwroot/_content/*
 
 /src/ForServer/wwwroot/*
 /src/ForServer/App_Data/*
 /src/ForServer/Properties/PublishProfiles/
-/src/ForServer/.config/
+
 
 /src/kwd.BoxOBlazor/wwwroot/*
 /src/kwd.BoxOBlazor/Web/scripts/util/*.js

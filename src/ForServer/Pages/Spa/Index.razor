@@ -1,4 +1,11 @@
 ﻿@page "/spa"
+@using Microsoft.Extensions.Options
+@using ForServer.Model
+@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.Hosting
+@inject IOptions<SiteConfig> siteConfig
+@inject IConfiguration configRoot;
+@inject IHostEnvironment env;
 
 <h1>Hello, world!</h1>
 <p>
@@ -6,14 +13,36 @@
 </p>
 
 <p>
-    This is a Single Page Application demo 
-    for server-side render blazor. 
+    This is a Single Page Application demo
+    for server-side render blazor.
 </p>
-
-
-<SurveyPrompt Title="How is Blazor working for you?" />
-
+@if (ShowForBrowserLink)
+{
+    <p>
+        There is also a demo using
+        blazor wasm (client side)
+        <a href="@ForBrowserUri">here</a>.
+    </p>
+}
+<p>
+    Running in @env.EnvironmentName
+</p>
 <section>
     <h2>Useful links</h2>
     <Links />
 </section>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    public string ForBrowserUri;
+
+    public bool ShowForBrowserLink;
+
+    protected override void OnInitialized()
+    {
+        ForBrowserUri = siteConfig.Value.ForBrowserSite;
+
+        ShowForBrowserLink =
+            Uri.IsWellFormedUriString(ForBrowserUri, UriKind.RelativeOrAbsolute);
+    }
+}

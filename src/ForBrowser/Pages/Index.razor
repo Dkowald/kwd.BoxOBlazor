@@ -1,8 +1,36 @@
 ﻿@page "/"
-@inject Microsoft.Extensions.Configuration.IConfiguration config;
+@using Microsoft.Extensions.Configuration
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IConfiguration config;
+@inject SiteConfig siteConfig;
+@inject IWebAssemblyHostEnvironment env;
 
 <h1>Hello, world!</h1>
 
 Welcome to @config["Title"].
 
+
+@if (ShowForServerLink)
+{
+    <p>
+        There is also a demo using
+        blazor spa (server side)
+        <a href="@siteConfig.ForServerSite">here</a>.
+    </p>
+}
+
+<p>
+    Running in <span>@env.Environment</span>.
+</p>
+
 <SurveyPrompt Title="How is Blazor working for you?" />
+@code
+{
+    public bool ShowForServerLink;
+
+    protected override void OnInitialized()
+    {
+        ShowForServerLink =
+            Uri.IsWellFormedUriString(siteConfig.ForServerSite, UriKind.RelativeOrAbsolute);
+    }
+}
