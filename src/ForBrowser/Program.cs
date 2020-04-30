@@ -51,6 +51,8 @@ namespace ForBrowser
             SiteConfig.Register(services);
 
             services.AddScoped<JsProxy>();
+
+            services.AddScoped<LocalStorage>();
         }
     }
 }

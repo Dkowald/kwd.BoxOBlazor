@@ -61,7 +61,9 @@ namespace ForServer
             services.AddSingleton<AppState>();
 			
 			services.AddScoped<JsProxy>();
-		}
+
+            services.AddScoped<LocalStorage>();
+        }
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
@@ -100,7 +102,9 @@ namespace ForServer
 				endpoints.MapRazorPages();
 
 				endpoints.MapBlazorHub();
-				endpoints.MapFallbackToPage("/_Host");
+
+				//Map all other URL's to this for a 404 display.
+				endpoints.MapFallbackToPage("/Spa");
 			});
 		}
 	}

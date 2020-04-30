@@ -1,7 +1,8 @@
 ﻿using System;
+using ForServer.Services;
 using kwd.BoxOBlazor.Services;
 
-namespace ForServer.Services
+namespace ForServer.Model
 {
     /// <summary>
     /// Application state model.

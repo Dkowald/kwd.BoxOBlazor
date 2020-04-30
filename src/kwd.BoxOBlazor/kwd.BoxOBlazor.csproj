@@ -23,6 +23,7 @@
 	<ItemGroup>
 		<!--Dont copy to out folder.-->
 		<Content Remove="compilerconfig.json" />
+		<None Remove="Web\scripts\util\LocalStorage.ts" />
 		<None Include="compilerconfig.json" />
 	</ItemGroup>
 

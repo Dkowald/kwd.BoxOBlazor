@@ -12,10 +12,11 @@
 	<link href="_content/kwd.BoxOBlazor/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	<link href="_content/kwd.BoxOBlazor/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
 	<link href="_content/kwd.BoxOBlazor/css/site.css" rel="stylesheet" />
-	
+    <script src="_content/kwd.BoxOBlazor/util.js" defer></script>
+
     <link href="css/forServer.css" rel="stylesheet" />
-    
-	@RenderSection("Head", false)
+
+    @await RenderSectionAsync("Head", false)
 </head>
 <body style="display: flex; flex-direction: row; position: relative;">
 <partial name="_ConnectionStatus"/>

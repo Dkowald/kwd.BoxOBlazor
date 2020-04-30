@@ -1,7 +1,10 @@
 
 ## Pack all 3 for azure site deploy
 
-## Timer system to coordinate client server.
+## State tricks.
+1. State shared between tabs.
+2. State persisted on browser.
+3. State shared to  
 
 ## Seperate styling.
 See if can weeken that strong bootstrap dependency.
