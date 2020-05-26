@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.8.3">
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -14,6 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="NReco.Logging.File" Version="1.0.5" />
+
+    <!--Add this explicitly or app fails when deployed to azure linux vm with missing assembly error.-->
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,7 +10,6 @@ namespace kwd.BoxOBlazor.Util {
 				Key : evt.key,
 				NewValue : evt.newValue,
 				OldValue : evt.oldValue,
-				StorageArea : evt.storageArea,
 				Url : evt.url
 			};
 

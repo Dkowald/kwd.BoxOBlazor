@@ -7,11 +7,13 @@ using ForServer.Services;
 using kwd.BoxOBlazor;
 using kwd.BoxOBlazor.Services;
 using kwd.BoxOBlazor.Services.Logging;
-using kwd.BoxOBlazor.Web.scripts.util;
 using kwd.BoxOBlazor.Web.util;
+
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +21,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ForServer
 {
-	public class Startup
+    public class Startup
 	{
 		private readonly IConfiguration _configuration;
 
@@ -44,7 +46,10 @@ namespace ForServer
 
             services.AddOptions()
                 .Configure<SiteConfig>(
-                    _configuration.GetSection(nameof(SiteConfig)));
+                    _configuration.GetSection(nameof(SiteConfig)))
+                .Configure<CircuitOptions>(
+                    _configuration.GetSection(nameof(CircuitOptions)));
+                
 
 			//server timing events
             services.AddSingleton<TimedCallback>()
@@ -55,8 +60,9 @@ namespace ForServer
 			services.AddControllersWithViews();
 			services.AddRazorPages();
 
-			services.AddServerSideBlazor();
-
+            services.AddServerSideBlazor()
+                .AddCircuitOptions(cfg => cfg.DetailedErrors=true);
+            
 			services.AddSingleton<WeatherForecastService>();
 
             services.AddSingleton<AppState>();
@@ -93,9 +99,20 @@ namespace ForServer
 			}
 
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
-			
-			app.UseRouting();
+
+            app.UseStaticFiles();
+
+			//extra file types for blazor wasm support
+			var mimeTypes = new FileExtensionContentTypeProvider();
+            mimeTypes.Mappings[".dll"] = "application/octet-stream";
+            mimeTypes.Mappings[".dat"] = "application/octet-stream";
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = mimeTypes
+            });
+
+            app.UseRouting();
 
 			app.UseEndpoints(endpoints =>
 			{
