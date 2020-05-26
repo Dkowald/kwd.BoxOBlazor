@@ -1,4 +1,6 @@
 ﻿@using kwd.BoxOBlazor.Services
+@using kwd.BoxOBlazor.Web.scripts.util
+@using kwd.BoxOBlazor.Web.util
 @inject LocalStorage localStorage
 @inject ILogger<LocalStorage> log
 @implements IDisposable
@@ -9,6 +11,7 @@
     <p>Local storage not supported on this browser.</p>
     return;
 }
+
 <p>
     There are currently @ItemCount items in local storage.
 </p>
@@ -23,16 +26,23 @@
     </p>
 }
 
-<p>
-    <input type="text" placeholder="key"
-           value="@NewItem"
-           @oninput="NewItemUpdated"
-           @onkeypress="NewItemKeyPressed" />
-    <button @onclick="AddItem" disabled="@AddIsDisabled">
-        <i class="oi oi-plus"></i>
-    </button>
-    <span>@WhyDisabled</span>
-</p>
+<section>
+    <p>Create new</p>
+    <p>
+        <input type="text" placeholder="key"
+               value="@NewItem"
+               @oninput="NewItemUpdated"
+               @onkeypress="NewItemKeyPressed" />
+        <button @onclick="AddItem" disabled="@AddIsDisabled">
+            <i class="oi oi-plus"></i>
+        </button>
+        <span>@WhyDisabled</span>
+    </p>
+    
+    <p>
+        <button type="button" @onclick="Clear">Clear</button>
+    </p>
+</section>
 
 @code {
 
@@ -48,22 +58,19 @@
 
     public SortedDictionary<string, string> Items = new SortedDictionary<string, string>();
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        localStorage.Storage += OnStorageChanged;
-
-        await base.OnInitializedAsync();
+        localStorage.StorageUpdated += OnStorageChanged;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await localStorage.HookStorageEvent();
-
             IsSupported = await localStorage.IsSupported();
             if (IsSupported)
             {
+                await localStorage.HookStorageEvent();
                 await LoadFromStorage();
             }
 
@@ -75,7 +82,7 @@
 
     public void Dispose()
     {
-        localStorage.Storage -= OnStorageChanged;
+        localStorage.StorageUpdated -= OnStorageChanged;
     }
 
     public void NewItemUpdated(ChangeEventArgs arg)
@@ -85,10 +92,16 @@
         WhyDisabled = "";
         bool addIsDisabled = false;
         if (string.IsNullOrWhiteSpace(val))
-        { WhyDisabled = "(cannot be empty)"; addIsDisabled |= true; }
+        {
+            WhyDisabled = "(cannot be empty)";
+            addIsDisabled |= true;
+        }
 
         if (Items.ContainsKey(val))
-        { WhyDisabled = "(already exists)"; addIsDisabled |= true; }
+        {
+            WhyDisabled = "(already exists)";
+            addIsDisabled |= true;
+        }
 
 
         if (addIsDisabled != AddIsDisabled || NewItem != val)
@@ -132,7 +145,12 @@
         await LoadFromStorage();
     }
 
-    public async Task LoadFromStorage()
+    public async Task Clear()
+    {
+        await localStorage.Clear();
+    }
+
+    private async Task LoadFromStorage()
     {
         ItemCount = await localStorage.GetLength();
 
@@ -146,5 +164,20 @@
         await InvokeAsync(StateHasChanged);
     }
 
-    private async void OnStorageChanged() => await LoadFromStorage();
+    private void OnStorageChanged(StorageEvent evt)
+    {
+        if (evt.Key is null)
+        {
+            Items.Clear();
+        }
+        else
+        {
+            if (evt.NewValue is null)
+                Items.Remove(evt.Key);
+            else
+                Items[evt.Key] = evt.NewValue;
+        }
+        StateHasChanged();
+    }
+
 }

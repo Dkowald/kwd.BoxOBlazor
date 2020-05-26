@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
-
+using kwd.BoxOBlazor.Web.scripts.util;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor.Services
+namespace kwd.BoxOBlazor.Web.util
 {
     /// <summary>
     /// Interop calls for Browser LocalStorage object.
     /// </summary>
+    /// <remarks>
+    /// Unlike the DOM;
+    /// this raises self-triggered events corresponding to
+    /// mutate methods.
+    /// </remarks>
     public class LocalStorage : IDisposable
     {
         private readonly IJSRuntime _interop;
@@ -25,7 +31,11 @@ namespace kwd.BoxOBlazor.Services
             => await _interop.InvokeAsync<bool>("kwd.BoxOBlazor.Util.hasLocalStorage");
 
         public async Task Clear()
-            => await _interop.InvokeVoidAsync("window.localStorage.clear");
+        {
+            await _interop.InvokeVoidAsync("window.localStorage.clear");
+
+            StorageUpdated?.Invoke(new StorageEvent(null, null, null, null));
+        }
 
         public async Task<string> Key(int index)
         {
@@ -40,18 +50,40 @@ namespace kwd.BoxOBlazor.Services
             return await _interop.InvokeAsync<string>("window.localStorage.getItem", key);
         }
 
-        public async Task<string> SetItem(string key, string value)
+        public async Task SetItem(string key, string value)
         {
             _log.LogTrace("Set {key} in local storage", key);
-            
-            return await _interop.InvokeAsync<string>("localStorage.setItem", key, value);
+
+            try
+            {
+                await _interop.InvokeVoidAsync("kwd.BoxOBlazor.Util.LocalStorage.setItem", key, value);
+
+                StorageUpdated?.Invoke(new StorageEvent(
+                    key, null, value, null));
+
+            }
+            catch (JSException jsError)
+            {
+                var error = EnrichError.TryUnwrap(jsError);
+
+                _log.LogError("JSError: "+ error.Message);
+
+                throw error;
+            }
         }
 
         public async Task RemoveItem(string key)
-            => await _interop.InvokeVoidAsync("localStorage.removeItem", key);
-        
+        {
+            await _interop.InvokeVoidAsync("localStorage.removeItem", key);
+
+            StorageUpdated?.Invoke(new StorageEvent(key, null, null));
+        }
+
+        /// <summary>
+        /// Number of items currently in local storage.
+        /// </summary>
         public async Task<int> GetLength()
-            => await _interop.InvokeAsync<int>("kwd.BoxOBlazor.Util.getLength");
+            => await _interop.InvokeAsync<int>("kwd.BoxOBlazor.Util.LocalStorage.getLength");
         
         #region Forward document Storage event
         /// <summary>
@@ -65,7 +97,7 @@ namespace kwd.BoxOBlazor.Services
         /// </summary>
         public async Task<bool> HookStorageEvent()
         {
-            _log.LogDebug("Attaching to document storage event");
+            _log.LogTrace("Attaching to document storage event");
             if (_jsRef != null)
             {
                 _log.LogDebug("Already hooked to local storage event");
@@ -84,13 +116,16 @@ namespace kwd.BoxOBlazor.Services
         /// <summary>
         /// Raised when browser local storage is updated.
         /// </summary>
-        public event Action Storage;
+        public event Action<StorageEvent> StorageUpdated;
 
         [JSInvokable]
-        public void HandleStorageEvent()
+        public void HandleStorageEvent(JsonElement oEvent)
         {
+            var evt = new StorageEvent(oEvent);
+            
             _log.LogTrace("Raise local storage change event.");
-            Storage?.Invoke();
+
+            StorageUpdated?.Invoke(evt);
         }
         #endregion
 
@@ -101,20 +136,5 @@ namespace kwd.BoxOBlazor.Services
             _jsRef = null;
         }
         #endregion
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <remarks>
-        /// https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent
-        /// </remarks>
-        public class StorageEvent
-        {
-            public readonly string Key;
-            public readonly string NewValue;
-            public readonly string OldValue;
-
-            public readonly string Url;
-        }
     }
 }

@@ -8,7 +8,8 @@ using ForBrowser.Services;
 using kwd.BoxOBlazor;
 using kwd.BoxOBlazor.Services;
 using kwd.BoxOBlazor.Services.Logging;
-
+using kwd.BoxOBlazor.Web.scripts.util;
+using kwd.BoxOBlazor.Web.util;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
