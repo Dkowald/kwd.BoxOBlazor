@@ -1,11 +1,12 @@
-﻿using kwd.BoxOBlazor;
+﻿using kwd.BoxOBlazor.Demo;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using WebWindows.Blazor;
 
 namespace ForDesk
 {
-	class Startup
+    class Startup
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{

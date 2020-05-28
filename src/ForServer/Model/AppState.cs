@@ -1,6 +1,6 @@
 ﻿using System;
 using ForServer.Services;
-using kwd.BoxOBlazor.Services;
+using kwd.BoxOBlazor.Demo.Services.Clock;
 
 namespace ForServer.Model
 {

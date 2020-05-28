@@ -19,14 +19,15 @@
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
-  </ItemGroup>
-
 	<ItemGroup>
     <!--Dont copy to out folder.-->
 		<Content Remove="compilerconfig.json" />
 		<None Include="compilerconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj" />
+	  <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
 	</ItemGroup>
 	
 </Project>

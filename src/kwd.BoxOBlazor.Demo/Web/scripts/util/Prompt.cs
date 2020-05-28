@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor.Web.scripts.util
+namespace kwd.BoxOBlazor.Demo.Web.util
 {
 	public class Prompt
 	{

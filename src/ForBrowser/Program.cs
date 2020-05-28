@@ -6,10 +6,10 @@ using ForBrowser.Model;
 using ForBrowser.Services;
 
 using kwd.BoxOBlazor;
-using kwd.BoxOBlazor.Services;
-using kwd.BoxOBlazor.Services.Logging;
-using kwd.BoxOBlazor.Web.scripts.util;
-using kwd.BoxOBlazor.Web.util;
+using kwd.BoxOBlazor.Demo;
+using kwd.BoxOBlazor.Demo.Services.Clock;
+using kwd.BoxOBlazor.Demo.Services.MemLog;
+using kwd.BoxOBlazor.Demo.Web.util;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,11 +28,9 @@ namespace ForBrowser
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
 
-            var memLog = new MemoryLogger(new DefaultClock());
-            builder.Services.AddSingleton(memLog);
             builder.Logging
                 .SetMinimumLevel(LogLevel.Information)
-                .AddProvider(memLog);
+                .AddMemoryLogger();
 
             ConfigureServices(builder.Services);
             

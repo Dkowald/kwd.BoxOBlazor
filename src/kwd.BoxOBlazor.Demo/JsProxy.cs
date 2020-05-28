@@ -1,7 +1,7 @@
-using kwd.BoxOBlazor.Web.scripts.util;
+using kwd.BoxOBlazor.Demo.Web.util;
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor
+namespace kwd.BoxOBlazor.Demo
 {
 	/// <summary>
 	/// A top-level js proxy 

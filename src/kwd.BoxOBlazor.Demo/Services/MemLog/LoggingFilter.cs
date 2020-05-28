@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace kwd.BoxOBlazor.Services.Logging
+namespace kwd.BoxOBlazor.Demo.Services.MemLog
 {
     public class LoggingFilter
     {

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.Json;
-
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor.Web.util
+namespace kwd.BoxOBlazor.Demo.Web.util
 {
     /*
      * Collect more JavaScript error details.

@@ -1,4 +1,4 @@
-﻿namespace kwd.BoxOBlazor.Unit
+﻿namespace kwd.BoxOBlazor.Demo.Unit
 {
 	/// <summary>
 	/// A number between 0 and 100.

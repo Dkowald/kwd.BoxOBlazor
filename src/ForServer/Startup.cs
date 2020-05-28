@@ -1,13 +1,14 @@
+using System.IO;
 using System.Linq;
 
 using ForServer.Data;
 using ForServer.Model;
 using ForServer.Services;
 
-using kwd.BoxOBlazor;
-using kwd.BoxOBlazor.Services;
-using kwd.BoxOBlazor.Services.Logging;
-using kwd.BoxOBlazor.Web.util;
+using kwd.BoxOBlazor.Demo;
+using kwd.BoxOBlazor.Demo.Services.Clock;
+using kwd.BoxOBlazor.Demo.Services.MemLog;
+using kwd.BoxOBlazor.Demo.Web.util;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Server;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -35,12 +37,9 @@ namespace ForServer
             services
                 .AddLogging(cfg =>
                 {
-					var provider = new MemoryLogger(new DefaultClock());
-					
-                    cfg.Services.AddSingleton(provider);
+                    cfg.AddMemoryLogger();
 
-                    cfg.AddProvider(provider);
-                    cfg.AddFile(
+					cfg.AddFile(
                         _configuration.GetSection("Logging"));
             });
 
@@ -49,7 +48,7 @@ namespace ForServer
                     _configuration.GetSection(nameof(SiteConfig)))
                 .Configure<CircuitOptions>(
                     _configuration.GetSection(nameof(CircuitOptions)));
-                
+               
 
 			//server timing events
             services.AddSingleton<TimedCallback>()
@@ -73,21 +72,10 @@ namespace ForServer
         }
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.All
-            });
-            app.Use((context, next) =>
-            {
-                if (context.Request.Headers.TryGetValue("X-Forwarded-PathBase", out var pathBases))
-                {
-                    context.Request.PathBase = pathBases.First();
-                }
-                return next();
-            });
+        {
+            ConfigureProxySupport(app);
 
-			if (env.IsDevelopment())
+            if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 			}
@@ -98,19 +86,11 @@ namespace ForServer
 				app.UseHsts();
 			}
 
+            ConfigureLocalWASM(app);
+
 			app.UseHttpsRedirection();
 
             app.UseStaticFiles();
-
-			//extra file types for blazor wasm support
-			var mimeTypes = new FileExtensionContentTypeProvider();
-            mimeTypes.Mappings[".dll"] = "application/octet-stream";
-            mimeTypes.Mappings[".dat"] = "application/octet-stream";
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                ContentTypeProvider = mimeTypes
-            });
 
             app.UseRouting();
 
@@ -125,5 +105,48 @@ namespace ForServer
 				endpoints.MapFallbackToPage("/Spa");
 			});
 		}
-	}
+
+        private void ConfigureProxySupport(IApplicationBuilder app)
+        {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+            app.Use((context, next) =>
+            {
+                if (context.Request.Headers.TryGetValue("X-Forwarded-PathBase", out var pathBases))
+                {
+                    context.Request.PathBase = pathBases.First();
+                }
+                return next();
+            });
+        }
+
+        private void ConfigureLocalWASM(IApplicationBuilder app)
+        {
+            var siteConfig = _configuration.GetSection(nameof(SiteConfig))
+                .Get<SiteConfig>();
+
+            if(siteConfig.WasmFileRoot is null)
+                return;
+            
+            //extra file types for blazor wasm support
+            var mimeTypes = new FileExtensionContentTypeProvider();
+            mimeTypes.Mappings[".dll"] = "application/octet-stream";
+            mimeTypes.Mappings[".dat"] = "application/octet-stream";
+
+            var wasmFiles = Path.Combine(
+                Directory.GetCurrentDirectory(),siteConfig.WasmFileRoot);
+
+            app.UseFileServer(new FileServerOptions
+            {
+                RequestPath = "/wasm",
+                StaticFileOptions =
+                {
+                    FileProvider = new PhysicalFileProvider(wasmFiles),
+                    ContentTypeProvider = mimeTypes
+                }
+            });
+        }
+    }
 }

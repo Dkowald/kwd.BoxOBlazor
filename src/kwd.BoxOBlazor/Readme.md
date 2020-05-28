@@ -1,10 +1,7 @@
-﻿
-# Javascript proxy
-Using a top-level JsProxy class to act as entry point for 
-c# proxy.
-This way, can keep javascript and c# together for readability.
+﻿# Overview
+Various extra pieces for buildign blazor based UI.
 
-
-# Todo
-Dont want .map files included
-in package.
+## Utility
+|Class| Description|
+|-----|------------|
+|ColorHelper|A utility to convert between RGB and HSL color spaces.|

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using kwd.BoxOBlazor.Demo.Services.Clock;
+
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace kwd.BoxOBlazor.Services.Logging
+namespace kwd.BoxOBlazor.Demo.Services.MemLog
 {
     /// <summary>
     /// Simple memory logging.
@@ -25,6 +29,16 @@ namespace kwd.BoxOBlazor.Services.Logging
         private long _lastLogRecord;
 
         private readonly int _reserved;
+
+        public static ILoggingBuilder Install(ILoggingBuilder loggingBuilder)
+        {
+            var clock = new DefaultClock();
+            var provider = new MemoryLogger(clock);
+
+            loggingBuilder.Services.AddSingleton(provider);
+
+            return loggingBuilder.AddProvider(provider);
+        }
 
         public MemoryLogger(IClock clock)
         {

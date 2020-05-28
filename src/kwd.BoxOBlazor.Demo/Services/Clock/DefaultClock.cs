@@ -1,12 +1,8 @@
 ﻿using System;
 
-namespace kwd.BoxOBlazor.Services
+namespace kwd.BoxOBlazor.Demo.Services.Clock
 {
-    public interface IClock
-    {
-        DateTime Now { get; }
-    }
-
+    /// <summary>Simple <see cref="DateTime.Now"/> abstraction.</summary>
     public class DefaultClock : IClock
     {
         public DateTime Now => DateTime.UtcNow;

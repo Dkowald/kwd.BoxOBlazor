@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using kwd.BoxOBlazor.Web.scripts.util;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor.Web.util
+namespace kwd.BoxOBlazor.Demo.Web.util
 {
     /// <summary>
     /// Interop calls for Browser LocalStorage object.

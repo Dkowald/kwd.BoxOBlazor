@@ -8,9 +8,9 @@
 
 /src/**/.config/
 
-/src/kwd.BoxOBlazor/wwwroot/*
-/src/kwd.BoxOBlazor/Web/scripts/util/*.js
-/src/kwd.BoxOBlazor/Web/scripts/util/*.js.map
+/src/kwd.BoxOBlazor.Demo/wwwroot/*
+/src/kwd.BoxOBlazor.Demo/Web/scripts/util/*.js
+/src/kwd.BoxOBlazor.Demo/Web/scripts/util/*.js.map
 
 /src/ForServer/wwwroot/*
 /src/ForServer/App_Data/*
