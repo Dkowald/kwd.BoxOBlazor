@@ -1,4 +1,4 @@
-﻿/// <reference path="./EnrichError.ts"/>
+﻿/// <reference path="../RicherException/EnrichError.ts"/>
 
 namespace kwd.BoxOBlazor.Util {
 

@@ -10,6 +10,6 @@
     "outDir": "../../../wwwroot/",
     "outFile": "../../../wwwroot/util.js"
   },
-  "files": [ "Prompt.ts", "LocalStorage.ts" ],
+  "files": [ "util.ts"],
   "compileOnSave": true
 }

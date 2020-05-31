@@ -1,4 +1,4 @@
-using kwd.BoxOBlazor.Demo.Web.util;
+using kwd.BoxOBlazor.Demo.util;
 using Microsoft.JSInterop;
 
 namespace kwd.BoxOBlazor.Demo

@@ -8,8 +8,7 @@ using ForServer.Services;
 using kwd.BoxOBlazor.Demo;
 using kwd.BoxOBlazor.Demo.Services.Clock;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
-using kwd.BoxOBlazor.Demo.Web.util;
-
+using kwd.BoxOBlazor.Demo.util;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Hosting;
@@ -137,6 +136,10 @@ namespace ForServer
 
             var wasmFiles = Path.Combine(
                 Directory.GetCurrentDirectory(),siteConfig.WasmFileRoot);
+
+            //todo: if use refreshes on child wasm path;
+            // can I intercept and pass the fill path through to the WASM 
+            // component?
 
             app.UseFileServer(new FileServerOptions
             {

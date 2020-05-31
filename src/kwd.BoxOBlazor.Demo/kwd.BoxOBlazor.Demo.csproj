@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +25,7 @@
 		<Content Remove="compilerconfig.json" />
 		<None Remove="Web\scripts\util\EnrichError.ts" />
 		<None Remove="Web\scripts\util\LocalStorage.ts" />
+		<None Remove="Web\scripts\util\util.ts" />
 		<None Include="compilerconfig.json" />
 	</ItemGroup>
 
@@ -37,9 +38,4 @@
       <Pack>false</Pack>
 	  </Content>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Util\" />
-	</ItemGroup>
-
 </Project>

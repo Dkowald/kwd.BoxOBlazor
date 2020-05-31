@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using kwd.BoxOBlazor.Demo.util.RicherException;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor.Demo.Web.util
+namespace kwd.BoxOBlazor.Demo.util
 {
     /// <summary>
     /// Interop calls for Browser LocalStorage object.
@@ -33,7 +34,7 @@ namespace kwd.BoxOBlazor.Demo.Web.util
         {
             await _interop.InvokeVoidAsync("window.localStorage.clear");
 
-            StorageUpdated?.Invoke(new StorageEvent(null, null, null, null));
+            StorageUpdated?.Invoke(new StorageEvent(null, null, null));
         }
 
         public async Task<string> Key(int index)
@@ -57,8 +58,7 @@ namespace kwd.BoxOBlazor.Demo.Web.util
             {
                 await _interop.InvokeVoidAsync("kwd.BoxOBlazor.Util.LocalStorage.setItem", key, value);
 
-                StorageUpdated?.Invoke(new StorageEvent(
-                    key, null, value, null));
+                StorageUpdated?.Invoke(new StorageEvent(key, null, value));
 
             }
             catch (JSException jsError)
