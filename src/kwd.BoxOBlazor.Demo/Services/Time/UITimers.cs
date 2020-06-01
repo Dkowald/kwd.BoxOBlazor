@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ForBrowser.Services
+namespace kwd.BoxOBlazor.Demo.Services.Time
 {
-    public class UITimer
+    /// <summary>
+    /// Timer based callbacks.
+    /// </summary>
+    public class UITimers : IUITimers
     {
         private readonly Dictionary<string, Timer> _timers;
 
-        public UITimer()
+        /// <summary>
+        /// Create new <see cref="UITimers"/> service.
+        /// </summary>
+        public UITimers()
         {
             _timers = new Dictionary<string, Timer>();
         }
 
-        public string Register(Action op,
+        /// <inheritdoc/>
+        public ValueTask<string> Register(Action op,
             TimeSpan startDelay,
             TimeSpan repeatPeriod,
             string name = null)
@@ -25,9 +32,10 @@ namespace ForBrowser.Services
 
             _timers.Add(name, item);
 
-            return name;
+            return new ValueTask<string>(name);
         }
 
+        /// <inheritdoc/>
         public async ValueTask<bool> UnRegister(string name)
         {
             if (_timers.TryGetValue(name, out var item))

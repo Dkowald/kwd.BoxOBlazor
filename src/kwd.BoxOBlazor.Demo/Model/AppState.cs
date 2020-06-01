@@ -1,24 +1,19 @@
 ﻿using System;
-using ForServer.Services;
-using kwd.BoxOBlazor.Demo.Services.Clock;
+using kwd.BoxOBlazor.Demo.Services.Time;
 
-namespace ForServer.Model
+namespace kwd.BoxOBlazor.Demo.Model
 {
     /// <summary>
-    /// Application state model.
+    /// Simple app state
     /// </summary>
     public class AppState
-    {
-        public DateTime ServerTime;
-        public TimeSpan UpTime;
-        public event Action UpTimeChanged;
-
-        public AppState(TimedCallback timedCallbacks, IClock sysClock)
+    {   
+        public AppState(IUITimers uiTimers, IClock sysClock)
         {
             var start = sysClock.Now;
 
             //Up time and clock.
-            timedCallbacks.Register(
+            uiTimers.Register(
                 () =>
                 {
                     ServerTime = sysClock.Now;
@@ -27,6 +22,10 @@ namespace ForServer.Model
                 },
                 TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
+
+        public DateTime ServerTime;
+        public TimeSpan UpTime;
+        public event Action UpTimeChanged;
 
         private void OnUpTimeChanged()
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace kwd.BoxOBlazor.Demo.Services.Clock
+namespace kwd.BoxOBlazor.Demo.Services.Time
 {
     /// <summary>Service to get time.</summary>
     public interface IClock

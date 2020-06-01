@@ -5,10 +5,9 @@ namespace kwd.BoxOBlazor.Demo.util
 {
 	public class Prompt
 	{
-		public static readonly string Namespace = 
-			"kwd.BoxOBlazor.Util.";
+        public const string JSNamespace = "kwd.BoxOBlazor.Util";
 
-		private readonly IJSRuntime _proxy;
+        private readonly IJSRuntime _proxy;
 		public Prompt(IJSRuntime proxy)
 		{
 			_proxy = proxy;
@@ -16,6 +15,6 @@ namespace kwd.BoxOBlazor.Demo.util
 
 		public async Task<string> ShowPrompt(string title, string prompt)
 			=> await _proxy.InvokeAsync<string>(
-				Namespace+"showPrompt", title, prompt);
+				JSNamespace+".showPrompt", title, prompt);
 	}
 }

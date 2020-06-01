@@ -17,7 +17,7 @@
 /src/ForServer/Properties/PublishProfiles/
 
 /src/ForBrowser/wwwroot/*
-/src/ForServer/Properties/PublishProfiles/
-!/src/ForServer/Properties/PublishProfiles/Local.pubxml
+/src/ForBrowser/Properties/PublishProfiles*
+!/src/ForBrowser/Properties/PublishProfiles/Local.pubxml
 
 /src/ForDesk/wwwroot/_content/*

@@ -1,5 +1,4 @@
 ﻿@page
-@using Microsoft.Extensions.Logging
 @inject ILoggerFactory Logger
 @{
     var log = Logger.CreateLogger("ForServer.Pages.Demo.ServerEvents");
@@ -12,4 +11,5 @@
     A simple clock to show server generated events presented in a Blazor
     component.
 </p>
-<component type="typeof(UpTime)" render-mode="ServerPrerendered" />
+<component type="typeof(UpTime)" render-mode="ServerPrerendered"
+           param-UpTimeLabel="@("Server up-time")" />

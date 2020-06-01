@@ -3,12 +3,13 @@ using System.Linq;
 
 using ForServer.Data;
 using ForServer.Model;
-using ForServer.Services;
 
 using kwd.BoxOBlazor.Demo;
-using kwd.BoxOBlazor.Demo.Services.Clock;
+using kwd.BoxOBlazor.Demo.Model;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
-using kwd.BoxOBlazor.Demo.util;
+using kwd.BoxOBlazor.Demo.Services.Time;
+using kwd.BoxOBlazor.Demo.util.ClientSideStorage;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Hosting;
@@ -50,10 +51,8 @@ namespace ForServer
                
 
 			//server timing events
-            services.AddSingleton<TimedCallback>()
-                .AddHostedService(ctx => ctx.GetRequiredService<TimedCallback>());
-
-            services.AddSingleton<IClock, DefaultClock>();
+            services.AddSingleton<IUITimers, UITimers>()
+                .AddSingleton<IClock, DefaultClock>();
 
 			services.AddControllersWithViews();
 			services.AddRazorPages();

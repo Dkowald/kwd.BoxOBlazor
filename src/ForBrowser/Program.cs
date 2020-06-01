@@ -3,12 +3,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using ForBrowser.Model;
-using ForBrowser.Services;
 
 using kwd.BoxOBlazor.Demo;
-using kwd.BoxOBlazor.Demo.Services.Clock;
+using kwd.BoxOBlazor.Demo.Model;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
-using kwd.BoxOBlazor.Demo.util;
+using kwd.BoxOBlazor.Demo.Services.Time;
+using kwd.BoxOBlazor.Demo.util.ClientSideStorage;
+
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -44,7 +45,7 @@ namespace ForBrowser
 
             services.AddScoped<AppState>();
 
-            services.AddSingleton<UITimer>();
+            services.AddSingleton<IUITimers, UITimers>();
 
             SiteConfig.Register(services);
 

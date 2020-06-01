@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using kwd.BoxOBlazor.Demo.Services.Clock;
-
+using kwd.BoxOBlazor.Demo.Services.Time;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

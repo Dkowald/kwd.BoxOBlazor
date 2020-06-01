@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace kwd.BoxOBlazor.Demo.util
+namespace kwd.BoxOBlazor.Demo.util.ClientSideStorage
 {
     /// <summary>
     /// Present a browser storage event in .NET 

@@ -5,7 +5,7 @@ using kwd.BoxOBlazor.Demo.util.RicherException;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace kwd.BoxOBlazor.Demo.util
+namespace kwd.BoxOBlazor.Demo.util.ClientSideStorage
 {
     /// <summary>
     /// Interop calls for Browser LocalStorage object.
@@ -17,6 +17,8 @@ namespace kwd.BoxOBlazor.Demo.util
     /// </remarks>
     public class LocalStorage : IDisposable
     {
+        private const string JSNamespace = "kwd.BoxOBlazor.Util";
+
         private readonly IJSRuntime _interop;
         private readonly ILogger<LocalStorage> _log;
         private DotNetObjectReference<LocalStorage> _jsRef;
@@ -28,7 +30,7 @@ namespace kwd.BoxOBlazor.Demo.util
         }
 
         public async Task<bool> IsSupported()
-            => await _interop.InvokeAsync<bool>("kwd.BoxOBlazor.Util.hasLocalStorage");
+            => await _interop.InvokeAsync<bool>(JSNamespace+".hasLocalStorage");
 
         public async Task Clear()
         {
@@ -56,7 +58,7 @@ namespace kwd.BoxOBlazor.Demo.util
 
             try
             {
-                await _interop.InvokeVoidAsync("kwd.BoxOBlazor.Util.LocalStorage.setItem", key, value);
+                await _interop.InvokeVoidAsync(JSNamespace+".LocalStorage.setItem", key, value);
 
                 StorageUpdated?.Invoke(new StorageEvent(key, null, value));
 
@@ -73,7 +75,7 @@ namespace kwd.BoxOBlazor.Demo.util
 
         public async Task RemoveItem(string key)
         {
-            await _interop.InvokeVoidAsync("localStorage.removeItem", key);
+            await _interop.InvokeVoidAsync("window.localStorage.removeItem", key);
 
             StorageUpdated?.Invoke(new StorageEvent(key, null, null));
         }
@@ -82,7 +84,7 @@ namespace kwd.BoxOBlazor.Demo.util
         /// Number of items currently in local storage.
         /// </summary>
         public async Task<int> GetLength()
-            => await _interop.InvokeAsync<int>("kwd.BoxOBlazor.Util.LocalStorage.getLength");
+            => await _interop.InvokeAsync<int>(JSNamespace+".LocalStorage.getLength");
         
         #region Forward document Storage event
         /// <summary>
@@ -105,7 +107,7 @@ namespace kwd.BoxOBlazor.Demo.util
 
             _jsRef = DotNetObjectReference.Create(this);
 
-            await _interop.InvokeVoidAsync("kwd.BoxOBlazor.Util.HookStorageEvent", _jsRef);
+            await _interop.InvokeVoidAsync(JSNamespace+".HookStorageEvent", _jsRef);
 
             _log.LogInformation("Attached to document storage event");
 
