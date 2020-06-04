@@ -133,9 +133,13 @@ namespace ForServer
             mimeTypes.Mappings[".dll"] = "application/octet-stream";
             mimeTypes.Mappings[".dat"] = "application/octet-stream";
 
+            //if happen to be serving wasm from debug build.
+            mimeTypes.Mappings[".pdb"] = "application/octet-stream";
+
             var wasmFiles = Path.Combine(
                 Directory.GetCurrentDirectory(),siteConfig.WasmFileRoot);
 
+            wasmFiles = @"C:\Source\kwd\kwd.BoxOBlazor\src\ForBrowser\bin\pub\wwwroot";
             //todo: if use refreshes on child wasm path;
             // can I intercept and pass the fill path through to the WASM 
             // component?
@@ -146,6 +150,17 @@ namespace ForServer
                 StaticFileOptions =
                 {
                     FileProvider = new PhysicalFileProvider(wasmFiles),
+                    ContentTypeProvider = mimeTypes
+                }
+            });
+
+            var wapFiles = @"C:\Source\repos\BlazorApp2\BlazorApp2\bin\Debug\netstandard2.1\publish\wwwroot";
+            app.UseFileServer(new FileServerOptions
+            {
+                RequestPath = "/wap",
+                StaticFileOptions =
+                {
+                    FileProvider = new PhysicalFileProvider(wapFiles),
                     ContentTypeProvider = mimeTypes
                 }
             });

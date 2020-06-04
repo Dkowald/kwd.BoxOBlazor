@@ -16,6 +16,13 @@
       <Out>wwwroot/sample-data/%(Filename)%(Extension)</Out>
     </WebAsset>
 
+    <WebAsset Include="Web/manifest.json">
+      <Out>wwwroot/%(Filename)%(Extension)</Out>
+    </WebAsset>
+
+    <WebAsset Include="Web/scripts/pwa/service-worker*.*">
+      <Out>wwwroot//%(Filename)%(Extension)</Out>
+    </WebAsset>
   </ItemGroup>
 
 	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 

@@ -1,13 +1,10 @@
 
 ## Pack all 3 for azure site deploy
 
-## State tricks.
-1. State shared between tabs.
-2. State persisted on browser.
-3. State shared to  
+### Better way to build for dev
+Include WASM with main demo, without needing a local package.
+See latest wasm templates for ideas.
 
-## Seperate styling.
-See if can weeken that strong bootstrap dependency.
 
 ## Forms Demo
     * Validation

@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+
+    <!--Generate assets as a js file-->
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
   
   <ItemGroup>
@@ -28,7 +31,12 @@
 		<None Include="wwwroot\appsettings.Development.json" />
 	</ItemGroup>
 
-	<ItemGroup>
+  <ItemGroup>
+    <!--swap to offline pwa worker for publish-->
+    <ServiceWorker Include="wwwroot/service-worker.js" PublishedContent="wwwroot/service-worker.offline.js" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <ProjectReference Include="..\kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj" />
 	  <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
 	</ItemGroup>
