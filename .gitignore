@@ -19,5 +19,5 @@
 /src/ForBrowser/wwwroot/*
 /src/ForBrowser/Properties/PublishProfiles*
 !/src/ForBrowser/Properties/PublishProfiles/Local.pubxml
-
-/src/ForDesk/wwwroot/_content/*
+/src/ForBrowser/pub/
+/src/ForBrowser/web.config

@@ -15,7 +15,6 @@ Particularly interested in developing design approaches for using brazor in prod
 | ---------- | --------------- | -------- |
 | ForServer  | Blazor Server   | Main demo site |
 | ForBrowser | Blazor WebAssem | Demo using web-assembly (currently at preview3) |
-| ForDesk    | WebWindow       | alpha    |
 |kwd.BoxOBlazor.Demo|Razor Class library (RCL) | Common demo components |
 |kwd.BoxOBlazor| RCL | Core package |
 |kwd.BoxOBlazor.Test| MSTest | Unit tests |

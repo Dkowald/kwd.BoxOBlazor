@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using ForBrowser.Model;
-
+using ForBrowser.Services;
 using kwd.BoxOBlazor.Demo;
 using kwd.BoxOBlazor.Demo.Model;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
@@ -40,8 +40,9 @@ namespace ForBrowser
 
 		static void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IClock, DefaultClock>()
-                .AddSingleton<ServerAssets>();
+            services.AddSingleton<IClock, DefaultClock>();
+
+            services.AddSingleton<ServerAssets>();
 
             services.AddScoped<AppState>();
 

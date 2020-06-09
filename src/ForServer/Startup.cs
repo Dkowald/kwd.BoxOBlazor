@@ -3,6 +3,7 @@ using System.Linq;
 
 using ForServer.Data;
 using ForServer.Model;
+using ForServer.Services.Middleware;
 
 using kwd.BoxOBlazor.Demo;
 using kwd.BoxOBlazor.Demo.Model;
@@ -62,9 +63,11 @@ namespace ForServer
             
 			services.AddSingleton<WeatherForecastService>();
 
+            WasmUrlRewrite.Add(services);
+
             services.AddSingleton<AppState>();
-			
-			services.AddScoped<JsProxy>();
+
+            services.AddScoped<JsProxy>();
 
             services.AddScoped<LocalStorage>();
         }
@@ -125,8 +128,7 @@ namespace ForServer
             var siteConfig = _configuration.GetSection(nameof(SiteConfig))
                 .Get<SiteConfig>();
 
-            if(siteConfig.WasmFileRoot is null)
-                return;
+            if(siteConfig.WasmFileRoot is null) return;
             
             //extra file types for blazor wasm support
             var mimeTypes = new FileExtensionContentTypeProvider();
@@ -137,15 +139,12 @@ namespace ForServer
             mimeTypes.Mappings[".pdb"] = "application/octet-stream";
 
             var wasmFiles = Path.Combine(
-                Directory.GetCurrentDirectory(),siteConfig.WasmFileRoot);
+                Directory.GetCurrentDirectory(), siteConfig.WasmFileRoot);
 
-            wasmFiles = @"C:\Source\kwd\kwd.BoxOBlazor\src\ForBrowser\bin\pub\wwwroot";
-            //todo: if use refreshes on child wasm path;
-            // can I intercept and pass the fill path through to the WASM 
-            // component?
-
+            //serve up wasm project: MUST be before wasm url re-writer.
             app.UseFileServer(new FileServerOptions
             {
+                EnableDefaultFiles = true,
                 RequestPath = "/wasm",
                 StaticFileOptions =
                 {
@@ -154,16 +153,8 @@ namespace ForServer
                 }
             });
 
-            var wapFiles = @"C:\Source\repos\BlazorApp2\BlazorApp2\bin\Debug\netstandard2.1\publish\wwwroot";
-            app.UseFileServer(new FileServerOptions
-            {
-                RequestPath = "/wap",
-                StaticFileOptions =
-                {
-                    FileProvider = new PhysicalFileProvider(wapFiles),
-                    ContentTypeProvider = mimeTypes
-                }
-            });
+            //rewrite base tag in index.html
+            WasmUrlRewrite.Use(app);
         }
     }
 }

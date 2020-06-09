@@ -1,9 +1,10 @@
 <Project>
-	<ItemGroup>
-    <WebAsset Include="Web/index.html">
-      <Out>wwwroot/index.html</Out>
-    </WebAsset>
-
+  <PropertyGroup>
+    <!--Default base url-->
+    <!--Specialized publish profiles should set this to suite-->
+    <baseUrl Condition="$(baseUrl) == ''">/</baseUrl>
+  </PropertyGroup>
+  <ItemGroup>
     <WebAsset Include="Web/favicon.*">
       <Out>wwwroot/%(Filename)%(Extension)</Out>
     </WebAsset>
@@ -29,4 +30,31 @@
 	        BeforeTargets="ResolveAssemblyReferences">
 		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
 	</Target>
+
+  <!--replace base url and copy index.html to wwwroot -->
+  <Target Name="UpdateAndCopyDefaultFile" BeforeTargets="Build" 
+          Inputs="web/index.html" Outputs="wwwroot/index.html">
+    <Message Text="BaseURL : $(baseUrl)" Importance="High" />
+    <CopyWithReplace Source="web/index.html" Destination="wwwroot/index.html"
+                     Find="base href=&quot;/&quot;" Replace="base href=&quot;$(baseUrl)&quot;"/>
+  </Target>
+
+  <UsingTask TaskName="CopyWithReplace" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
+    <ParameterGroup>
+      <Source Required="true"/>
+      <Destination Required="true"/>
+      <Find Required="true"/>
+      <Replace Required="true"/>
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Code Type="Fragment">
+        <![CDATA[
+          File.WriteAllText(Destination, 
+            File.ReadAllText(Source)
+              .Replace(Find, Replace) );
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 </Project>

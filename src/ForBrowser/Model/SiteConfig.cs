@@ -6,7 +6,7 @@ namespace ForBrowser.Model
     public class SiteConfig
     {
         /// <summary>
-        /// Register access to config object.
+        /// Site configuration.
         /// </summary>
         /// <remarks>
         /// todo: consider IOption pattern in future.
