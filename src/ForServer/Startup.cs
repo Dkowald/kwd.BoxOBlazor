@@ -128,7 +128,7 @@ namespace ForServer
             var siteConfig = _configuration.GetSection(nameof(SiteConfig))
                 .Get<SiteConfig>();
 
-            if(siteConfig.WasmFileRoot is null) return;
+            if(string.IsNullOrWhiteSpace(siteConfig.WasmFileRoot)) return;
             
             //extra file types for blazor wasm support
             var mimeTypes = new FileExtensionContentTypeProvider();
