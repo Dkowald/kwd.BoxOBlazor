@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor", "kwd.BoxOB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Demo", "kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj", "{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStamp", "BlazorStamp\BlazorStamp.csproj", "{AA21C428-8F13-4E26-9FFA-948941D0608B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

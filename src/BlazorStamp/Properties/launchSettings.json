@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WasmStamp": {
+      "commandName": "Project",
+      "workingDirectory": "./"
+    }
+  }
+}

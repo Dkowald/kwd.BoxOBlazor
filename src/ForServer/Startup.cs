@@ -3,7 +3,6 @@ using System.Linq;
 
 using ForServer.Data;
 using ForServer.Model;
-using ForServer.Services.Middleware;
 
 using kwd.BoxOBlazor.Demo;
 using kwd.BoxOBlazor.Demo.Model;
@@ -62,8 +61,6 @@ namespace ForServer
                 .AddCircuitOptions(cfg => cfg.DetailedErrors=true);
             
 			services.AddSingleton<WeatherForecastService>();
-
-            WasmUrlRewrite.Add(services);
 
             services.AddSingleton<AppState>();
 
@@ -141,7 +138,7 @@ namespace ForServer
             var wasmFiles = Path.Combine(
                 Directory.GetCurrentDirectory(), siteConfig.WasmFileRoot);
 
-            //serve up wasm project: MUST be before wasm url re-writer.
+            //serve up wasm static assets.
             app.UseFileServer(new FileServerOptions
             {
                 EnableDefaultFiles = true,
@@ -152,9 +149,6 @@ namespace ForServer
                     ContentTypeProvider = mimeTypes
                 }
             });
-
-            //rewrite base tag in index.html
-            WasmUrlRewrite.Use(app);
         }
     }
 }

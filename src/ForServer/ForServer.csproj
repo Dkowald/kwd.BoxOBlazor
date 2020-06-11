@@ -28,6 +28,10 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj" />
 	  <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
+
+    <!--Include project (for build); but no assem reference-->
+    <ProjectReference Include="..\BlazorStamp\BlazorStamp.csproj" ReferenceOutputAssembly="false" />
+    
 	</ItemGroup>
 	
 </Project>

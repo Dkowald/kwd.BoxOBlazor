@@ -14,4 +14,15 @@
 		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
 	</Target>
 
+  <!--Re-stamp the local published web assem for the demo server-->
+  <PropertyGroup>
+    <BlazorStampPath>"../BlazorStamp/bin/$(Configuration)/$(TargetFramework)/BlazorStamp.exe"</BlazorStampPath>
+    <StampCmd>$(BlazorStampPath) PhysicalPath=../ForBrowser/pub/wwwroot UrlBase=/wasm/</StampCmd>
+  </PropertyGroup>
+
+  <Target Name="StampWebAssemProject" AfterTargets="Build">
+    <Message Importance="Normal" Text="Updating wasm artifacts"/>
+    <Message Importance="High" Text="Exec stamp: $(StampCmd)"/>
+    <Exec Command="$(StampCmd)"></Exec>
+  </Target>
 </Project>
