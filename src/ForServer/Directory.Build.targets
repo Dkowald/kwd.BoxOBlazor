@@ -17,7 +17,7 @@
   <!--Re-stamp the local published web assem for the demo server-->
   <PropertyGroup>
     <BlazorStampPath>"../BlazorStamp/bin/$(Configuration)/$(TargetFramework)/BlazorStamp.exe"</BlazorStampPath>
-    <StampCmd>$(BlazorStampPath) PhysicalPath=../ForBrowser/pub/wwwroot UrlBase=/wasm/</StampCmd>
+    <StampCmd>$(BlazorStampPath) TargetPath=../ForBrowser/pub/wwwroot BaseURL=/wasm/</StampCmd>
   </PropertyGroup>
 
   <Target Name="StampWebAssemProject" AfterTargets="Build">

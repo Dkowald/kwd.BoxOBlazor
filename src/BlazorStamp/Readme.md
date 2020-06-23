@@ -1,16 +1,40 @@
 ﻿# Overview
-Tool to update file(s) in a published blazor web assembly project.
+Tool to update file(s) for a published blazor web assembly project.
 
-1. Provide a custom urlBase to update the default html document (index.html).
+This tool scans service-worker-assets.js, updating the hash value for 
+all the referenced files.
 
-2. Updates service-worker-assets.js with new hash's.
+You can also use this to update the base element in the default html file.
+
+## Install
+This is a dotnet cli tool, use following to install:
+
+> dotnet tool install BlazorStamp
+
+See also: [manage dotnet tools](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools).
 
 ## Usage
-A simple .NET tool driven by config.
-Use appsettings.config or environment or command line.
+CLI help : __dotnet blazorstamp ?__
 
-If provided; **UrlBase** is used to set the base elment in the default html document.
+Option can be configured via appsettings.config, environment or arguments.
 
-If service-worker-assets.js file exists; hashes are re-calculated and saved.
+|Option|Description|
+|---|---|
+|**TargetPath**| Path to wasm files, defaults to current directory (./)|
+|**DefaultFile**| Html default file, defaults to _index.html_ |
+|**BaseUrl**|  (optional) Replacement href for base element in default file.|
 
+e.g. Basic usage, just change the blazor wasm files as desired, 
+then run 
+> dotent blazorstamp
 
+in the same directory.
+This will update the service-worker-assets.js file to reflect changes.
+
+e.g.
+Replace the base element href with _/wasm/_
+> dotnet blazorstamp base=/wasm/
+
+This will replace the base element href value with /wasm/.
+Then re-calculate all hash's in service-worker-assets.js.
+Finally re-creating the compressed version(s) of service-worker-assets.js

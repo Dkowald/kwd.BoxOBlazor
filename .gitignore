@@ -21,3 +21,7 @@
 !/src/ForBrowser/Properties/PublishProfiles/Local.pubxml
 /src/ForBrowser/pub/
 /src/ForBrowser/web.config
+
+/src/BlazorStamp/pub/
+/src/BlazorStamp/Properties/PublishProfiles
+/src/**/.vscode/

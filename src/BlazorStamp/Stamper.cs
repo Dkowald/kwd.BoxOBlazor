@@ -36,35 +36,47 @@ namespace BlazorStamp
             _config = site;
 
             _indexHtml = new FileInfo(
-                Path.Combine(site.PhysicalPath, site.DefaultFile));
+                Path.Combine(site.TargetPath, site.DefaultFile));
 
             _assetsManifest = new FileInfo(
-                Path.Combine(site.PhysicalPath, "service-worker-assets.js"));
+                Path.Combine(site.TargetPath, "service-worker-assets.js"));
         }
 
         /// <summary>
         /// Updates the site file(s)
         /// </summary>
-        public async Task Execute()
+        public async Task<int> Execute()
         {
+            Console.WriteLine("Updating files in '"+
+                              Path.GetFullPath(_config.TargetPath) + "'");
+            
             //replace index html.
-            if(_indexHtml.Exists)
+            if (_indexHtml.Exists && !string.IsNullOrWhiteSpace(_config.BaseUrl))
+            {
+                Console.WriteLine("Updating base element in default file");
                 await UpdateBaseElement();
+            }
 
             //re-do assets data.
             if (_assetsManifest.Exists)
             {
+                Console.WriteLine("Updating asset");
                 await RebuildAssetFile();
                 await GzCompressAssetFile();
                 await BrCompressAssetFile();
             }
+
+            if (!_indexHtml.Exists && !_assetsManifest.Exists)
+            {return -1;}
+
+            return 0;
         }
 
         private async Task UpdateBaseElement()
         {
             var body = await File.ReadAllTextAsync(_indexHtml.FullName);
 
-            var baseElement = $"<base href= \"{_config.UrlBase}\" />";
+            var baseElement = $"<base href=\"{_config.BaseUrl}\" />";
             
             body = Regex.Replace(body, BaseElementPattern, baseElement);
             
@@ -83,7 +95,7 @@ namespace BlazorStamp
 
             foreach (var asset in manifest.assets)
             {
-                var path = Path.Combine(_config.PhysicalPath, asset.url);
+                var path = Path.Combine(_config.TargetPath, asset.url);
                 await using var rd = File.OpenRead(path);
 
                 var h = hasher.ComputeHash(rd);

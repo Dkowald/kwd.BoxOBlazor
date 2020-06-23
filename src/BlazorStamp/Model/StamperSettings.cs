@@ -5,12 +5,12 @@ namespace BlazorStamp.Model
         /// <summary>
         /// Physical path to wasm site files.
         /// </summary>
-        public string PhysicalPath { get; set; }
+        public string TargetPath { get; set; }
 
         /// <summary>
         /// Url Base path for server; default file base element set to this.
         /// </summary>
-        public string UrlBase { get; set; }
+        public string BaseUrl { get; set; }
 
         /// <summary>
         /// Html start file.
