@@ -1,9 +1,7 @@
 ﻿@page "/"
 @using Microsoft.Extensions.Configuration
-@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @inject IConfiguration config;
 @inject SiteConfig siteConfig;
-@inject IWebAssemblyHostEnvironment env;
 
 <h1>Hello, world!</h1>
 
@@ -19,9 +17,7 @@ Welcome to @config["Title"].
     </p>
 }
 
-<p>
-    Running in <span>@env.Environment</span>.
-</p>
+<ConfigEnvironment />
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 @code

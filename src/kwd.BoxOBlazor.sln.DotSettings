@@ -5,4 +5,5 @@
 	
 	<!--Don't want for ts.-->
 	<s:Boolean x:Key="/Default/CodeInspection/ExcludedFiles/FileMasksToSkip/=_002A_002Ets/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=4A50301D_002D86EC_002D4F6C_002D940C_002DF3463D1CE3B1_002Fd_003Apub/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 </wpf:ResourceDictionary>

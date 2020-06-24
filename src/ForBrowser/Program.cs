@@ -42,7 +42,8 @@ namespace ForBrowser
         {
             services.AddSingleton<IClock, DefaultClock>();
 
-            services.AddSingleton<ServerAssets>();
+            services.AddSingleton<ServerAssets>()
+                .AddSingleton<Links>();
 
             services.AddScoped<AppState>();
 

@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject Links links
+@inject HttpClient Http;
+@inject ILogger<ConfigEnvironment> Log;
+@inject IWebAssemblyHostEnvironment env;
+
+<h3>@Title</h3>
+
+<p>This blazor wasm app is running in <span>@env.Environment</span>.</p>
+
+<p>
+    This site uses <Link Target="@links["nginx"]" /> as the external (port-80) facing proxy.
+    To configure the executing environemnt,
+</p>
+<p>
+    As per <Link Target="ConfigDoc" />,
+    the environment is described via a custom http header: <em>blazor-environment</em>.
+    When published, a blazor wasm site incudes <em>_framework/blazor.boot.json</em> to
+    describe the app. The browser loads this data,
+</p>
+<p>
+    As blazor wasm loads it reads <em>_framework/blazor.boot.json</em>.
+    At this point the header is used to define the environment.
+</p>
+
+<pre>
+<code>@NginxFragment</code>
+</pre>
+@code {
+    public string Title = "Blazor wasm set executing environment";
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+
+        Log.LogTrace("Loading nginx config fragment");
+        var fragment = await Http.GetStringAsync("SetHeader.nginx");
+        NginxFragment = fragment;
+    }
+
+    public string NginxFragment = "Loading...";
+
+    private ExternalLink ConfigDoc = new ExternalLink("blazor docs",
+        "https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/environments?view=aspnetcore-3.1");
+}

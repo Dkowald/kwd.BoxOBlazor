@@ -1,5 +1,9 @@
 <Project>
   <ItemGroup>
+    <WebAsset Include="Web/SetHeader.nginx">
+      <Out>wwwroot/%(Filename)%(Extension)</Out>
+    </WebAsset>
+
     <WebAsset Include="Web/index.html">
       <Out>wwwroot/%(Filename)%(Extension)</Out>
     </WebAsset>
@@ -21,7 +25,7 @@
     </WebAsset>
 
     <WebAsset Include="Web/scripts/pwa/service-worker*.*">
-      <Out>wwwroot//%(Filename)%(Extension)</Out>
+      <Out>wwwroot/%(Filename)%(Extension)</Out>
     </WebAsset>
     
   </ItemGroup>

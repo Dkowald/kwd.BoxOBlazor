@@ -1,0 +1,9 @@
+﻿location /wasm {
+  root /home/dkowald/bin/app/BoxOBlazor/;
+  try_files $uri $uri/ /index.html =404;
+
+  location /wasm/_framework/blazor.boot.json {
+    #set blazor wasm enviroment.
+    add_header blazor-environment Production;
+  }
+}
