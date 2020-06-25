@@ -8,6 +8,7 @@ using kwd.BoxOBlazor.Demo;
 using kwd.BoxOBlazor.Demo.Model;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
 using kwd.BoxOBlazor.Demo.Services.Time;
+using kwd.BoxOBlazor.Demo.util;
 using kwd.BoxOBlazor.Demo.util.ClientSideStorage;
 
 using Microsoft.AspNetCore.Builder;
@@ -64,7 +65,10 @@ namespace ForServer
 
             services.AddSingleton<AppState>();
 
-            services.AddScoped<JsProxy>();
+            //browser services
+            services
+                .AddScoped<Prompt>()
+                .AddScoped<Clipboard>();
 
             services.AddScoped<LocalStorage>();
         }

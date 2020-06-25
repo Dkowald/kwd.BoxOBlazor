@@ -1,8 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using kwd.BoxOBlazor.Demo.util
 @inject Links links
 @inject HttpClient Http;
 @inject ILogger<ConfigEnvironment> Log;
 @inject IWebAssemblyHostEnvironment env;
+@inject Clipboard clipboard;
 
 <h3>@Title</h3>
 
@@ -23,23 +25,34 @@
     At this point the header is used to define the environment.
 </p>
 
-<pre>
-<code>@NginxFragment</code>
+
+<pre><i @onclick="CopyToClipboard" class="oi oi-clipboard" title="copy to clipboard" aria-hidden="true"></i>
+<code @ref="FragmentElement">@NginxFragment</code>
 </pre>
 @code {
     public string Title = "Blazor wasm set executing environment";
+
+    public string NginxFragment = "Loading...";
+
+    public ElementReference FragmentElement;
 
     protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
 
         Log.LogTrace("Loading nginx config fragment");
-        var fragment = await Http.GetStringAsync("SetHeader.nginx");
+        var fragment = await Http.GetStringAsync("SetHeader.nginx.txt");
         NginxFragment = fragment;
     }
 
-    public string NginxFragment = "Loading...";
+    protected async Task CopyToClipboard()
+    {
+        await clipboard.CopyFromElement(FragmentElement);
+    }
 
     private ExternalLink ConfigDoc = new ExternalLink("blazor docs",
-        "https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/environments?view=aspnetcore-3.1");
+    "https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/environments?view=aspnetcore-3.1");
+
+
+
 }

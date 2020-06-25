@@ -1,5 +1,6 @@
 ﻿@using Microsoft.Extensions.Logging
-@inject JsProxy JsProxy
+@using kwd.BoxOBlazor.Demo.util
+@inject Prompt prompt
 @inject ILogger<NamePrompt> Log;
 
 @if (Name is null)
@@ -20,7 +21,7 @@ else
 	{
 		Console.WriteLine("Calling js via interop");
 		Log.LogTrace("Calling js via interop");
-		var newName = await JsProxy.Util.ShowPrompt("Enter name", Name);
+		var newName = await prompt.ShowPrompt("Enter name", Name);
 
 		if (newName != null)
 		{ Name = newName; }

@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <WebAsset Include="Web/SetHeader.nginx">
+    <WebAsset Include="Web/SetHeader.nginx.txt">
       <Out>wwwroot/%(Filename)%(Extension)</Out>
     </WebAsset>
 

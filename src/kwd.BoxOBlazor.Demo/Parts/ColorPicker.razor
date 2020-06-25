@@ -1,7 +1,9 @@
 ﻿@using Microsoft.Extensions.Logging
 @using kwd.BoxOBlazor.Demo.Unit
+@using kwd.BoxOBlazor.Demo.util
 @using kwd.BoxOBlazor.Util
 @inject ILogger<ColorPicker> Log;
+@inject Clipboard clipboard;
 @*
     # todo
        Use colored slider bar(s) for values.
@@ -9,30 +11,35 @@
        Move to component; and share on other platforms.
        Use timer to trigger data update without need to blur.
 *@
-<p style="background-color: @Hex; color: @Contrast()">Color: @Hex</p>
-<p>
-    Hex:<input value="@Hex" @onchange="HexColorChanged" />
-</p>
+<div class="colorPicker">
+    <p class="result" style="background-color: @Hex; color: @Contrast()">
+        Color: @Hex
+        
+        <i @onclick="CopyToClipboard" class="oi oi-clipboard"></i>
+    </p>
+    <p>
+        Hex:<input @ref="hexColorValue" value="@Hex" @onchange="HexColorChanged" />
+    </p>
 
-<p>
-    RGB:
-    <input type="number" max="255" min="0" name="@nameof(Red)" value="@Red"
-           @onchange="@(e => RGBValueChanged(e, nameof(Red)))" />
-    / <input type="number" max="255" min="0" name="@nameof(Green)" value="@Green"
-             @onchange="@(e => RGBValueChanged(e, nameof(Green)))" />
-    / <input type="number" max="255" min="0" name="@nameof(Blue)" value="@Blue"
-             @onchange="@(e => RGBValueChanged(e, nameof(Blue)))" />
-</p>
-<p>
-    HSL:
-    <input type="number" min="0" max="359" name="@nameof(Hue)" value="@Hue"
-           @onchange="@(e => HSLChanged(e, nameof(Hue)))" />
-    / <input type="number" min="0" max="100" name="@nameof(Saturation)" value="@Saturation"
-             @onchange="@(e => HSLChanged(e, nameof(Saturation)))" />%
-    / <input type="number" min="0" max="100" name="@nameof(Lightness)" value="@Lightness"
-             @onchange="@(e => HSLChanged(e, nameof(Lightness)))" />%
-</p>
-
+    <p>
+        RGB:
+        <input type="number" max="255" min="0" name="@nameof(Red)" value="@Red"
+               @onchange="@(e => RGBValueChanged(e, nameof(Red)))" />
+        / <input type="number" max="255" min="0" name="@nameof(Green)" value="@Green"
+                 @onchange="@(e => RGBValueChanged(e, nameof(Green)))" />
+        / <input type="number" max="255" min="0" name="@nameof(Blue)" value="@Blue"
+                 @onchange="@(e => RGBValueChanged(e, nameof(Blue)))" />
+    </p>
+    <p>
+        HSL:
+        <input type="number" min="0" max="359" name="@nameof(Hue)" value="@Hue"
+               @onchange="@(e => HSLChanged(e, nameof(Hue)))" />
+        / <input type="number" min="0" max="100" name="@nameof(Saturation)" value="@Saturation"
+                 @onchange="@(e => HSLChanged(e, nameof(Saturation)))" />%
+        / <input type="number" min="0" max="100" name="@nameof(Lightness)" value="@Lightness"
+                 @onchange="@(e => HSLChanged(e, nameof(Lightness)))" />%
+    </p>
+</div>
 @code {
 
     private string Hex;
@@ -44,6 +51,8 @@
     private int Hue;
     private Percent Saturation;
     private Percent Lightness;
+
+    private ElementReference hexColorValue;
 
     protected override void OnInitialized()
     {
@@ -107,6 +116,11 @@
             ColorHelper.HSLToRGB(Hue, Saturation.Value / 100, Lightness.Value / 100);
 
         Hex = ColorHelper.RGBToHex(Red, Green, Blue);
+    }
+
+    protected async Task CopyToClipboard()
+    {
+        await clipboard.CopyToClipboard(Hex);
     }
 
     private Percent ReadPercent(string txtValue)

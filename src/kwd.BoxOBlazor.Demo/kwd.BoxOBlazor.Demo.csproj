@@ -23,6 +23,7 @@
 	<ItemGroup>
 		<!--Dont copy to out folder.-->
 		<Content Remove="compilerconfig.json" />
+		<None Remove="Web\scripts\util\Clipboard.ts" />
 		<None Remove="Web\scripts\util\EnrichError.ts" />
 		<None Remove="Web\scripts\util\LocalStorage.ts" />
 		<None Remove="Web\scripts\util\util.ts" />
