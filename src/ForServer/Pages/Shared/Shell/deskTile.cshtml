@@ -1,0 +1,11 @@
+﻿@model ForServer.Pages.Shared.Shell.DeskTile
+<section class="desk-tile">
+    <header class="title">
+        <a href="@Model.OpenUrl">
+            @if (Model.Icon != null)
+            {<img class="icon" src="@Model.Icon"/>}
+            @Model.Title
+        </a>
+    </header>
+    <p class="description">@Model.Description</p>
+</section>

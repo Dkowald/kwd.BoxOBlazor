@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/forServer.css",
     "inputFile": "Web/css/forServer.less"
+  },
+  {
+    "outputFile": "wwwroot/shell/shell.css",
+    "inputFile": "Pages/Shared/Shell/shell.less"
   }
 ]

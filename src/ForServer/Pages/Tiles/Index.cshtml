@@ -1,0 +1,9 @@
+﻿@page "/tiles"
+@using ForServer.Pages.Tiles;
+@model TilesModel;
+@{
+    ViewBag.RootUrl = "/Tiles";
+    Layout = "Shell/ShellLayout";
+}
+
+<partial name="shell/desk" model="@Model.Desk" />

@@ -1,0 +1,15 @@
+﻿@page
+@inject ILoggerFactory Logger
+@{
+    var log = Logger.CreateLogger("ForServer.Pages.Demo.ServerEvents");
+
+    log.LogInformation("Showing Clock demo");
+}
+<h1>Demo server-generated events in UI.</h1>
+
+<p>
+    A simple clock to show server generated events presented in a Blazor
+    component.
+</p>
+<component type="typeof(UpTime)" render-mode="ServerPrerendered"
+           param-UpTimeLabel="@("Server up-time")" />

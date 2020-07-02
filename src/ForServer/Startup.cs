@@ -92,7 +92,8 @@ namespace ForServer
 
 			app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+            app.UseDefaultFiles()
+                .UseStaticFiles();
 
             app.UseRouting();
 

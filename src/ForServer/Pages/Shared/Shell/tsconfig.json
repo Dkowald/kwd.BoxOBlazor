@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    //"inlineSourceMap": true,
+    "inlineSources": true,
+    "target": "ESNext",
+    "outFile": "../../../wwwroot/shell/shell.js"
+  },
+  "files": ["shell.ts"]
+}

@@ -1,0 +1,118 @@
+﻿html{
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+body {
+    box-sizing: border-box;
+    border-width: 0;
+    width: calc(100% - 1em);
+    height: calc(100% - 2em);
+    padding: 1em .5em;
+    margin: auto;
+    background-color: yellow;
+    overflow-x: hidden;
+}
+
+.shell {
+    background-color: aquamarine;
+    padding: .2em 1em;
+    overflow: hidden;
+    width: calc(100% - 2em);
+    min-height: calc(100% - .4em);
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
+
+.desk {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.desk-tile {
+    padding: .2em .5em;
+    margin: .2em;
+    /*fit 3 along row; given min window width of 500px*/
+    width: calc(500px/3 - 2em); /*2em = 4*.5, the inter card spaces*/
+    height: 10em;
+    background-color: antiquewhite;
+    border: 2px solid black;
+    text-align: center;
+    overflow-wrap: break-word;
+
+    .title {
+        font-family: 'MuseoModerno', cursive;
+        font-size: 15px;
+        a{
+            img{
+                display:block;
+                margin:auto;
+                height:2em;
+            }
+        }
+    }
+
+    .description{
+        margin: .2em 0;
+    }
+}
+
+.shell-nav {
+    @nav-height: 30px;
+    @callout-font-size: 15px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-family: Rage;
+    font-size: @callout-font-size;
+    height: @nav-height;
+    background-color: blueviolet;
+
+    a.button {
+        @border-width: 2px;
+        @padding-tb: 1px;
+
+        display: inline-block;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        background: linear-gradient(0deg, #efefef 0%, rgba(239,239,239,1) 100%);
+        padding: 1px 6px;
+        border-width: @border-width;
+        border-style: outset;
+        border-color: #c3c3c3;
+        font-family: sans-serif;
+        line-height: @nav-height - 2*@border-width - 2*@padding-tb;
+        transition: background 250ms ease-in-out, transform 150ms ease;
+        cursor: pointer;
+
+        .fa-layer-group {
+            transition: transform 1s;
+            transform: rotate(0deg);
+        }
+
+        &:hover, &:focus {
+            background: linear-gradient(0deg, rgba(195,195,195,1) 0%, rgba(239,239,239,1) 100%);
+
+
+            .fa-layer-group {
+                transition: transform 1s;
+                transform: rotate(-90deg);
+            }
+        }
+
+        &:focus {
+            outline: 1px solid #fff;
+            outline-offset: -4px;
+        }
+
+        &:active {
+            transform: scale(1.2);
+        }
+    }
+}
