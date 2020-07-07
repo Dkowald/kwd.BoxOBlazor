@@ -50,10 +50,11 @@ namespace ForServer.Pages.Tiles
                         Title = "Local storage", 
                         Description = "Using local storage for in-browser data",
                         OpenUrl = "Tiles/LocalStorage"
-                    },
-                    new DeskTile {Title = "App 1", Description = "A sample app", OpenUrl = TileUrl("App1")},
-                    new DeskTile {Title = "App 2", Description = longest},
-                    new DeskTile {Title = "App 3", Description = "Another"}
+                    //},
+                    //new DeskTile {Title = "App 1", Description = "A sample app", OpenUrl = TileUrl("App1")},
+                    //new DeskTile {Title = "App 2", Description = longest},
+                    //new DeskTile {Title = "App 3", Description = "Another"}
+                    }
                 }
             };
         }

@@ -1,0 +1,52 @@
+﻿<div class="desk">
+<div class="tileLayout">
+    <CascadingValue Value="this">
+        @ChildContent
+
+        @if (BasicItems != null)
+            @foreach (var item in BasicItems)
+            {
+                if (BasicItemTemplate is null)
+                {<BasicItemTemplateDefault Item="@item"></BasicItemTemplateDefault>}
+                else{@BasicItemTemplate(item)}
+            }
+    </CascadingValue>
+</div>
+</div>
+@code {
+
+    private List<DeskTile> _basicTiles = new List<DeskTile>();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    
+    /// <summary>
+    /// A set of desk tiles.
+    /// </summary>
+    [Parameter]
+    public DeskBasicTile[] BasicItems { get; set; }
+
+    /// <summary>
+    /// Optional custom component for each basic item.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<DeskBasicTile> BasicItemTemplate { get; set; }
+    
+    public void AddTile(DeskTile tile)
+    {
+        if(tile is null){return;}
+
+        var found = _basicTiles.SingleOrDefault(x => x.Title == tile.Title);
+        if(found != null && !Object.ReferenceEquals(found, tile))
+            throw new Exception($"Cannot add Tile with same Title: {tile.Title}");
+
+        _basicTiles.Add(tile);
+    }
+
+    public string GenerateAutoId()
+        => "Tile-" + TileCount().ToString();
+
+    private int TileCount()
+        => _basicTiles.Count + BasicItems?.Length ?? 0;
+
+}

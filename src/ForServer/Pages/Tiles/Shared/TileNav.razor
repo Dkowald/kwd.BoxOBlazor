@@ -1,0 +1,16 @@
+﻿<div class="tile-nav">
+    <a class="button" href="@RootUrl">
+        <i class="fas fa-layer-group"></i>Desk
+    </a>
+</div>
+@code {
+
+    protected override void OnParametersSet()
+    {
+        if(string.IsNullOrWhiteSpace(RootUrl))
+            throw new ArgumentNullException(nameof(RootUrl));
+    }
+
+    [Parameter]
+    public string RootUrl { get; set; }
+}

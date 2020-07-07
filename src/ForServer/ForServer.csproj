@@ -22,6 +22,7 @@
 	<ItemGroup>
     <!--Dont copy to out folder.-->
 		<Content Remove="compilerconfig.json" />
+		<_ContentIncludedByDefault Remove="wwwroot\css\tiles.css" />
 		<None Include="compilerconfig.json" />
 	</ItemGroup>
 
@@ -32,6 +33,10 @@
     <!--Include project (for build); but no assem reference-->
     <ProjectReference Include="..\BlazorStamp\BlazorStamp.csproj" ReferenceOutputAssembly="false" />
     
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\Tiles\Shared\css\" />
 	</ItemGroup>
 	
 </Project>

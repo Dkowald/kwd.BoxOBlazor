@@ -5,6 +5,10 @@
   },
   {
     "outputFile": "wwwroot/shell/shell.css",
-    "inputFile": "Pages/Shared/Shell/shell.less"
+    "inputFile": "Pages/TilesRazor/Shell/shell.less"
+  },
+  {
+    "outputFile": "wwwroot/css/tiles.css",
+    "inputFile": "Pages/Tiles/Shared/Tiles.less"
   }
 ]

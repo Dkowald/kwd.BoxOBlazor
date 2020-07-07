@@ -1,11 +1,10 @@
-﻿@page
+﻿@page "/tiles/logView"
 @using kwd.BoxOBlazor.Demo.Parts.MemLog;
 
 @inject ILoggerFactory Logger
 
 <h1>Demo logging </h1>
-
-<component type="@typeof(MemoryLogViewer)" render-mode="ServerPrerendered" />
+<MemoryLogViewer/>
 
 @{
     //cshtml: class not part of assembly; manually get category.
