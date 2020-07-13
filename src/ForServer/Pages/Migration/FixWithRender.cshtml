@@ -1,0 +1,39 @@
+﻿@page
+@using ForServer.Pages.Migration
+@using ForServer.Pages.Migration.Static
+<component type="typeof(Heading)" render-mode="Static"
+           param-Tagline="@("Multiple components, no pre-render")" />
+
+<p>
+    This is a fix for <a href="~/Migration/MultipleComponents">multiple blazor components.</a>
+</p>
+<p>
+    <b>This page is Fixed</b>
+</p>
+<p>
+    The original problem is caused by using server pre-render to render the components.
+    If the components have no client side behaviour, then swapping to 
+    <a href="~/Migration">static render </a> may do.
+    <br />
+    But its more likely the answer is change to server render.
+</p>
+<p>
+    Swapping to server render will introduce re-layout on the browser when the
+    component(s) load. <br />
+    Solve this by reserving the html space with pre-sized elements;
+    or try <a href="~/Migration/FixWithWrapper">fix with wrapper</a>.
+</p>
+<section class="migration-section">
+    <h3>blazor component</h3>
+    <p>
+        JS Interop to collect data:
+        <component type="typeof(NamePrompt)" render-mode="Server" />
+    </p>
+    <p>
+        Up Time:
+        <component type="typeof(UpTime)" render-mode="Server" />
+    </p>
+</section>
+<p>
+    The above section contains multiple blazor components, rendered by the server.
+</p>

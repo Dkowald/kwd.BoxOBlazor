@@ -1,0 +1,15 @@
+﻿<header>
+    <h1>Migrating from Razor to Blazor</h1>
+    <p>@Tagline</p>
+</header>
+
+@code{
+    [Parameter]
+    public string Tagline { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+}

@@ -4,7 +4,6 @@ using System.Linq;
 using ForServer.Data;
 using ForServer.Model;
 
-using kwd.BoxOBlazor.Demo;
 using kwd.BoxOBlazor.Demo.Model;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
 using kwd.BoxOBlazor.Demo.Services.Time;
@@ -105,7 +104,7 @@ namespace ForServer
 				endpoints.MapBlazorHub();
 
 				//Map all other URL's to this for a 404 display.
-				endpoints.MapFallbackToPage("/Spa");
+				endpoints.MapFallbackToPage("/_Host");
 			});
 		}
 

@@ -34,9 +34,5 @@
     <ProjectReference Include="..\BlazorStamp\BlazorStamp.csproj" ReferenceOutputAssembly="false" />
     
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Pages\Tiles\Shared\css\" />
-	</ItemGroup>
 	
 </Project>

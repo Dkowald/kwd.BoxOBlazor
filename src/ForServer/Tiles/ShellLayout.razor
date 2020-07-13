@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Http
+@inherits LayoutComponentBase
+    <main class="shell">
+        <TileNav RootUrl="@RootUrl"></TileNav>
+        <div class="desk">
+            @Body
+        </div>
+    </main>
+@code {
+
+    protected override void OnParametersSet()
+    {
+        if(string.IsNullOrWhiteSpace(RootUrl))
+            throw new Exception("Must provide root url to desktop home");
+
+        base.OnParametersSet();
+    }
+    
+    [CascadingParameter]
+    public PathString RootUrl { get; set; } = "/demo";
+
+}

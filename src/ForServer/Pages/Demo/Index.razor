@@ -1,0 +1,88 @@
+﻿@page "/demo"
+@using ForServer.Tiles
+<TilePanel BasicTiles="@Items">
+    <ChildContent>
+        <Tile Title="About" 
+              Description="A developers playground for various experiments"
+              OpenUrl="@($"/About")">
+        </Tile>
+
+        <Tile Title="JS Interop"
+              Description="Demo basic javascript interop, with a prompt"
+              OpenUrl="@($"{Path}/Interop")">
+            <IconArea>
+                <span class="icon oi oi-audio-spectrum" aria-hidden="true"></span>
+            </IconArea>
+        </Tile>
+
+        <Tile Title="Color tool"
+              Description="Demo richer blazor updates as a simple color tool"
+              OpenUrl="@($"{Path}/ColorTool")">
+            <IconArea>
+                <span class="icon oi oi-fire" aria-hidden="true"></span>
+            </IconArea>
+        </Tile>
+
+        <Tile Title="Misbehave" OpenUrl="@($"{Path}/Misbehave")">
+            <DescriptionArea>
+                Behaviour with various errors
+            </DescriptionArea>
+            <IconArea>
+                <span class="icon oi oi-warning" aria-hidden="true"></span>
+            </IconArea>
+        </Tile>
+
+        <Tile Title="Alarm clock"
+              Description="Demo richer blazor updates as a simple color tool"
+              OpenUrl="@($"{Path}/AlarmClock")"
+              IconUrl="/img/alarmClock.svg">
+        </Tile>
+
+        <Tile Title="Local storage" OpenUrl="@($"{Path}/LocalStorage")">
+            <DescriptionArea>
+                Demo using browser local storage for cross tab data
+            </DescriptionArea>
+            <IconArea>
+                <span class="icon oi oi-browser" aria-hidden="true"></span>
+            </IconArea>
+        </Tile>
+
+    </ChildContent>
+</TilePanel>
+@code {
+    public static readonly string Path = "/demo";
+
+    private BasicTile[] Items = new BasicTile[]
+    {
+        //A simple item described via text.
+        new BasicTile
+        {
+            Title = "Log viewer",
+            Description = "View latest logging events",
+            OpenUrl = $"{Path}/LogView",
+            IconUrl = "_content/kwd.BoxOBlazor.Demo/img/log.svg"
+        },
+        new BasicTile
+        {
+            Title = "BlazorInRazor",
+            OpenUrl = $"/Migration/",
+            Description = "Sample page using classic razor (ASP.NET MVC), with partial update to blazor components"
+        } 
+    };
+
+    private static string LongestText
+    {
+
+        get
+        {
+            var longest =
+                "Created signs. " +
+                "Fruit second land isn't, moveth land fish greater i he life so you're. " +
+                "Great subdue was land the firmament yielding likeness were ";
+
+            longest = longest + longest.Length + "midst creature it gathering. I in fly third shall is.";
+            return longest;
+        }
+    }
+
+}

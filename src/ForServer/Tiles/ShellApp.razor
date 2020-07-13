@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Http
+
+<Router AppAssembly="typeof(ShellApp).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="typeof(ShellLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="typeof(ShellLayout)">
+            <p>Woops.. thats not even a thing.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

@@ -1,0 +1,18 @@
+﻿@page "/demo/logView"
+@using kwd.BoxOBlazor.Demo.Parts.MemLog;
+@inject ILoggerFactory Logger
+
+<h1>Demo logging </h1>
+<MemoryLogViewer/>
+
+@code {
+    private ILogger<LogView> _log;
+    protected override void OnInitialized()
+    {
+        _log = _log ?? Logger.CreateLogger<LogView>();
+
+        _log.LogInformation("Showing Logging demo");
+
+        base.OnInitialized();
+    }
+}

@@ -1,14 +1,10 @@
 ﻿[
   {
-    "outputFile": "wwwroot/css/forServer.css",
-    "inputFile": "Web/css/forServer.less"
+    "inputFile": "Web/css/forServer.less",
+    "outputFile": "wwwroot/css/forServer.css"
   },
   {
-    "outputFile": "wwwroot/shell/shell.css",
-    "inputFile": "Pages/TilesRazor/Shell/shell.less"
-  },
-  {
-    "outputFile": "wwwroot/css/tiles.css",
-    "inputFile": "Pages/Tiles/Shared/Tiles.less"
+    "inputFile": "Tiles/Tiles.less",
+    "outputFile": "wwwroot/css/tiles.css"
   }
 ]

@@ -1,0 +1,35 @@
+﻿@page
+@using ForServer.Pages.Migration.Static
+
+<component type="typeof(Heading)" render-mode="Static"
+           param-Tagline="@("More features with interactive blazor")"/>
+
+<p>
+    With <a href="~/Migration/">static render</a>, 
+    blazor can be used more like a html generator, matching the 
+    approach for classic asp.net mvc razor.
+</p>
+<p>
+    But this page go one step further, using a blazor component with interactive 
+    abilities.
+</p>
+<p>
+    Here a part of an original mvc only page have been replaced with blazor, see 
+    <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/integrate-components?view=aspnetcore-3.1">
+        blazor documentation
+    </a> for more details.
+</p>
+
+<section class="migration-section" >
+    <h3>blazor component</h3>
+    <p>
+        JS Interop to collect data:
+        <component type="typeof(NamePrompt)" render-mode="ServerPrerendered"/>
+    </p>
+</section>
+
+<p>
+    The above section is server-side render blazor.
+    Further migration to include 
+    <a href="~/Migration/MultipleComponents">multiple blazor components.</a>
+</p>

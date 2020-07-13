@@ -1,0 +1,51 @@
+﻿<div class="tileLayout">
+    <CascadingValue Value="this">
+        @ChildContent
+
+        @if (BasicTiles != null)
+            @foreach (var item in BasicTiles)
+            {
+                if (BasicTilesTemplate is null)
+                {<BasicTileDefaultTemplate Item="@item"></BasicTileDefaultTemplate>}
+                else{@BasicTilesTemplate(item)}
+            }
+    </CascadingValue>
+</div>
+@code {
+
+    private List<ITileItem> _basicTiles = new List<ITileItem>();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    
+    /// <summary>A set of simple tiles, <seealso cref="BasicItemTemplate"/>.</summary>
+    [Parameter]
+    public BasicTile[] BasicTiles { get; set; }
+
+    /// <summary>
+    /// Optional override the default tile template for <seealso cref="BasicTiles"/>.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<BasicTile> BasicTilesTemplate { get; set; }
+    
+    /// <summary>
+    /// Call-back; every child tile must call-back to record its existance in this parent.
+    /// </summary>
+    public void AddTile(ITileItem tile)
+    {
+        if(tile is null){return;}
+
+        var found = _basicTiles.SingleOrDefault(x => x.Title == tile.Title);
+        if(found != null && !Object.ReferenceEquals(found, tile))
+            throw new Exception($"Cannot add Tile with same Title: {tile.Title}");
+
+        _basicTiles.Add(tile);
+    }
+
+    public string GenerateAutoId()
+        => "Tile-" + TileCount().ToString();
+
+    private int TileCount()
+        => _basicTiles.Count + BasicTiles?.Length ?? 0;
+
+}

@@ -1,0 +1,147 @@
+﻿@import "var.less";
+
+//size the document.
+html,body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    border-width:0;
+}
+
+@color-0: #3a0647;
+@color-1: #052767;
+
+@color-2: #faebd7;
+@color-3: #116DEB;
+
+@color-4: #efefef ;
+@color-5: rgba(239,239,239,1) ;
+
+.shell-wrap {
+    padding: 1em 4px;
+    margin: auto;
+    border-width: 0;
+    width: calc(100% - 8px);
+    height: calc(100% - 2em);
+    overflow-x: hidden;
+
+    @color-0-outer: lighten(@color-0, 50%);
+    @color-1-outer: lighten(@color-1, 50%);
+    background: linear-gradient(0deg, @color-0-outer 0%, @color-1-outer 100%);
+
+    > .shell {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.tile-nav {
+
+    @nav-height: 30px;
+    @callout-font-size: 15px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-family: Rage;
+    font-size: @callout-font-size;
+    height: @nav-height;
+    background-color: lighten(@color-0, 7%);
+
+    a.button {
+        @border-width: 2px;
+        @padding-tb: 1px;
+
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        background: linear-gradient(0deg, @color-4 0%, @color-5 100%);
+
+        padding: 1px 6px;
+        border-width: @border-width;
+        border-style: outset;
+        border-color: #c3c3c3;
+        font-family: sans-serif;
+        line-height: @nav-height - 2*@border-width - 2*@padding-tb;
+        transition: background 250ms ease-in-out, transform 150ms ease;
+        cursor: pointer;
+
+        .fa-layer-group {
+            transition: transform 1s;
+            transform: rotate(0deg);
+        }
+
+        &:hover, &:focus {
+            background: linear-gradient(0deg, rgba(195,195,195,1) 0%, rgba(239,239,239,1) 100%);
+
+
+            .fa-layer-group {
+                transition: transform 1s;
+                transform: rotate(-90deg);
+            }
+        }
+
+        &:focus {
+            outline: 1px solid #fff;
+            outline-offset: -4px;
+        }
+
+        &:active {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.desk {
+    flex-grow: 1;
+    padding: .2em 1em;
+    color: @color-4;
+    background-image: linear-gradient(0deg, @color-0 0%, @color-1 100%);
+
+    .tileLayout {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        
+    }
+}
+
+.desk-tile {
+    
+    padding: .2em .5em;
+    margin: .2em;
+    /*fit 3 along row; given min window width of 500px*/
+    width: calc(500px/3 - 2em); /*2em = 4*.5, the inter card spaces*/
+    height: 10em;
+    background-color: @color-2;
+    color: @color-3;
+    border: 2px solid black;
+    text-align: center;
+    overflow-wrap: break-word;
+
+    .title {
+        font-family: 'MuseoModerno', cursive;
+        font-size: 15px;
+
+        a {
+            .icon {
+                display: block;
+                margin: auto;
+                height: 2em;
+                line-height: 2em;
+            }
+        }
+    }
+
+    .description {
+        margin: .2em 0;
+    }
+}
+

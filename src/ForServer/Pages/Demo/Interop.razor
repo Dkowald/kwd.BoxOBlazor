@@ -1,0 +1,18 @@
+﻿@page "/demo/Interop"
+@inject ILoggerFactory Logger
+@code {
+    private ILogger<Interop> _log;
+    protected override void OnInitialized()
+    {
+        _log = _log ?? Logger.CreateLogger<Interop>();
+
+        _log.LogInformation("Showing Interop demo");
+
+        base.OnInitialized();
+    }
+}
+<h1>Demo interop with Javascript</h1>
+
+<p>
+    What is your name <NamePrompt />
+</p>

@@ -1,0 +1,33 @@
+﻿@implements ITileItem
+<section class="desk-tile">
+    <header class="title">
+        <a href="@Item.OpenUrl">
+            @if (Item.IconUrl != null)
+            {<img class="icon" src="@Item.IconUrl" />}
+            
+            @Item.Title
+        </a>
+    </header>
+    <p class="description">@Item.Description</p>
+</section>
+
+@code {
+    [CascadingParameter]
+    public TilePanel Owner { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Owner.AddTile(this);
+        base.OnInitialized();
+    }
+
+    protected override void OnParametersSet()
+    {
+        Title = Item.Title;
+    }
+
+    [Parameter]
+    public BasicTile Item { get; set;}
+
+    public string Title { get; set; }
+}
