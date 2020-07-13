@@ -1,14 +1,12 @@
 ﻿@inject NavigationManager _navManager;
+@inject TilesService _tiles;
 @implements IDisposable
 <div class="tile-nav @Active">
-    @if(IsAtRootUrl){<i>***</i>}
-    <a class="button" href="@RootUrl">
-        <i class="fas fa-layer-group"></i>Desk
+    <a class="button @Active" href="@Url">
+        <i class="fas fa-layer-group"></i>Home
     </a>
 </div>
 @code {
-    private string _rawRootUrl;
-
     void IDisposable.Dispose()
     {
         _navManager.LocationChanged -= OnLocationChanged;
@@ -17,42 +15,32 @@
     protected override Task OnInitializedAsync()
     {
         _navManager.LocationChanged += OnLocationChanged;
-        UpdateIsAtRootUrl();
+
+        OnLocationChanged();
 
         return base.OnInitializedAsync();
     }
 
-    protected override void OnParametersSet()
-    {
-        if(string.IsNullOrWhiteSpace(RootUrl))
-            throw new ArgumentNullException(nameof(RootUrl));
+    private bool IsAtRootUrl { get; set; } = true;
 
-        _rawRootUrl = RootUrl.Trim('/').ToLower();
-    }
+    private string Active { get; set; } = "active";
 
-    [Parameter]
-    public string RootUrl { get; set; }
-
-    private bool IsAtRootUrl { get; set; }
-
-    private string Active { get; set; } = "";
+    private string Url { get; set; } = "";
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    => OnLocationChanged();
+
+    private void OnLocationChanged()
     {
         var originalIsAtRoot = IsAtRootUrl;
-        UpdateIsAtRootUrl();
+
+        var path = _navManager.ToBaseRelativePath(_navManager.Uri).Trim('/');
+        IsAtRootUrl = path.ToLower() == _tiles.RawRootUrl;
+
+        Active = IsAtRootUrl ? "active" : "";
+        Url = IsAtRootUrl ? "" : _tiles.RootUrl.ToString();
 
         if (originalIsAtRoot != IsAtRootUrl)
-        {
-            Active = IsAtRootUrl ? "active" : "";
-
-            StateHasChanged();
-        }
-    }
-
-    private void UpdateIsAtRootUrl()
-    {
-        var path = _navManager.ToBaseRelativePath(_navManager.Uri).Trim('/');
-        IsAtRootUrl = path.ToLower() == _rawRootUrl;
+        { StateHasChanged(); }
     }
 }

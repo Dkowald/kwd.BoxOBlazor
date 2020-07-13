@@ -3,7 +3,7 @@ using System.Linq;
 
 using ForServer.Data;
 using ForServer.Model;
-
+using ForServer.Tiles;
 using kwd.BoxOBlazor.Demo.Model;
 using kwd.BoxOBlazor.Demo.Services.MemLog;
 using kwd.BoxOBlazor.Demo.Services.Time;
@@ -63,6 +63,8 @@ namespace ForServer
 			services.AddSingleton<WeatherForecastService>();
 
             services.AddSingleton<AppState>();
+
+            services.AddSingleton(new TilesService("/"));
 
             //browser services
             services

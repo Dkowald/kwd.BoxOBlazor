@@ -60,7 +60,6 @@ html,body {
         text-decoration: none;
         color: black;
         background: linear-gradient(0deg, @color-4 0%, @color-5 100%);
-
         padding: 1px 6px;
         border-width: @border-width;
         border-style: outset;
@@ -68,30 +67,35 @@ html,body {
         font-family: sans-serif;
         line-height: @nav-height - 2*@border-width - 2*@padding-tb;
         transition: background 250ms ease-in-out, transform 150ms ease;
-        cursor: pointer;
+        cursor: default;
+        opacity: .2;
 
         .fa-layer-group {
             transition: transform 1s;
             transform: rotate(0deg);
         }
 
-        &:hover, &:focus {
-            background: linear-gradient(0deg, rgba(195,195,195,1) 0%, rgba(239,239,239,1) 100%);
+        &:not(.active) {
+            cursor: pointer;
+            opacity:1;
 
+            &:hover, &:focus {
+                background: linear-gradient(0deg, rgba(195,195,195,1) 0%, rgba(239,239,239,1) 100%);
 
-            .fa-layer-group {
-                transition: transform 1s;
-                transform: rotate(-90deg);
+                .fa-layer-group {
+                    transition: transform 1s;
+                    transform: rotate(-90deg);
+                }
             }
-        }
 
-        &:focus {
-            outline: 1px solid #fff;
-            outline-offset: -4px;
-        }
+            &:focus {
+                outline: 1px solid #fff;
+                outline-offset: -4px;
+            }
 
-        &:active {
-            transform: scale(1.2);
+            &:active {
+                transform: scale(1.2);
+            }
         }
     }
 }
