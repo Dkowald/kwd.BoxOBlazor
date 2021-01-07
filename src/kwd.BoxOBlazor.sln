@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForBrowser", "ForBrowser\Fo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26DAB011-0D4F-48EA-A13C-6BED30EBA5CA}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		..\.gitignore = ..\.gitignore
 		kwd.BoxOBlazor.sln.DotSettings = kwd.BoxOBlazor.sln.DotSettings
 		..\LICENSE = ..\LICENSE
@@ -22,7 +23,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor", "kwd.BoxOB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Demo", "kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj", "{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStamp", "BlazorStamp\BlazorStamp.csproj", "{AA21C428-8F13-4E26-9FFA-948941D0608B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForBrowser.Host", "ForBrowser.Host\ForBrowser.Host.csproj", "{156129F3-1A73-4E7F-8318-F08A64DF3AB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{ADEC37F4-CDBD-4F9C-A92C-F815003694E4}"
+	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,13 +56,16 @@ Global
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA21C428-8F13-4E26-9FFA-948941D0608B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADEC37F4-CDBD-4F9C-A92C-F815003694E4} = {26DAB011-0D4F-48EA-A13C-6BED30EBA5CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A1BD62B-8D51-443E-A42A-9492D400602A}

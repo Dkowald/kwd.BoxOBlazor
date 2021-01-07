@@ -6,8 +6,6 @@
 /src/**/appsettings.*.json
 /src/**/*.user
 
-/src/**/.config/
-
 /src/kwd.BoxOBlazor.Demo/wwwroot/*
 /src/kwd.BoxOBlazor.Demo/Web/scripts/util/*.js
 /src/kwd.BoxOBlazor.Demo/Web/scripts/util/*.js.map
@@ -22,6 +20,7 @@
 /src/ForBrowser/pub/
 /src/ForBrowser/web.config
 
-/src/BlazorStamp/pub/
-/src/BlazorStamp/Properties/PublishProfiles
 /src/**/.vscode/
+
+/src/**/PublishProfiles/*
+!/src/**/PublishProfiles/Local.pubxml

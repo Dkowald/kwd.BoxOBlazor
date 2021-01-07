@@ -14,15 +14,26 @@
 		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
 	</Target>
 
-  <!--Re-stamp the local published web assem for the demo server-->
+
+  <Target Name="RestoreLocalTools" AfterTargets="BeforeBuild">
+    <Exec Command="dotnet tool restore" StandardOutputImportance="High" />
+  </Target>
+
+  <ItemGroup>
+    <WebCompile Include="Web/css/forServer.scss" Out="wwwroot/css/forServer.css" />
+    <WebCompile Include="Tiles/Tiles.scss" Out="wwwroot/css/tiles.css" />
+  </ItemGroup>
+
   <PropertyGroup>
-    <BlazorStampPath>"../BlazorStamp/bin/$(Configuration)/$(TargetFramework)/BlazorStamp.exe"</BlazorStampPath>
-    <StampCmd>$(BlazorStampPath) TargetPath=../ForBrowser/pub/wwwroot BaseURL=/wasm/</StampCmd>
+    <WebCompilerConfig>webcompiler.json</WebCompilerConfig>
+    <WebCompilerConfig  Condition="'$(Configuration)' == 'Release'">webcompiler.Release.json</WebCompilerConfig>
   </PropertyGroup>
 
-  <Target Name="StampWebAssemProject" AfterTargets="Build">
-    <Message Importance="Normal" Text="Updating wasm artifacts"/>
-    <Message Importance="High" Text="Exec stamp: $(StampCmd)"/>
-    <Exec Command="$(StampCmd)"></Exec>
+  <Target Name="RunWebCompile" AfterTargets="RestoreLocalTools" Inputs="@(WebCompile);$(WebCompilerConfig)" Outputs="%(Out)">
+    <Message Importance="High" Text="Running webcompiler tool: "/>
+
+    <Exec Command="dotnet tool run webcompiler %(WebCompile.Identity) -c $(WebCompilerConfig)"
+          StandardOutputImportance="High" StandardErrorImportance="High" />
   </Target>
+
 </Project>

@@ -1,9 +1,9 @@
-﻿@import "./site/_var";
-@import "./site/main";
+﻿@import "site/_var.scss";
+@import "./site/main.scss";
 @import "./site/sidebar";
 @import "./site/circuitError";
 
-@import "../../Parts/ColorPicker.less";
+@import "../../Parts/ColorPicker.scss";
 
 body{
 	background-color: var(--main-bg-color);

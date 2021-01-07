@@ -1,0 +1,38 @@
+﻿@page
+@*This is a copy of index.html from the razor app.
+Use this so server gets chance for some updates*@
+<!DOCTYPE html>
+<html>
+<head>
+    @*Host updates base*@ 
+    <base href="~/" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>BoxOBlazor - ForBrowser</title>
+
+    <script src="_framework/blazor.webassembly.js" defer></script>
+
+    <link href="manifest.json" rel="manifest" />
+    <script defer>navigator.serviceWorker.register('service-worker.js');</script>
+
+    <link href="_content/kwd.BoxOBlazor.Demo/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="_content/kwd.BoxOBlazor.Demo/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+    <script src="_content/kwd.BoxOBlazor.Demo/util.js"></script>
+    <link href="_content/kwd.BoxOBlazor.Demo/css/site.css" rel="stylesheet" />
+
+    <link href="css/forBrowser.css" rel="stylesheet" />
+</head>
+
+<body>
+    <app>Loading...</app>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+</body>
+
+</html>

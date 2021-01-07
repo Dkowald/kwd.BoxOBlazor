@@ -1,10 +1,10 @@
-﻿@svr-main-color: #b15714;
+﻿$svr-main-color: #b15714;
 @import "../../Pages/Shared/_ConnectionStatus";
-@import "../../Pages/Shared/_CircuitError.less";
-@import "../../Pages/Migration/Migration.less";
+@import "../../Pages/Shared/_CircuitError";
+@import "../../Pages/Migration/Migration";
 
 :root {
-	--main-bg-color: @svr-main-color;
+	--main-bg-color: #{$svr-main-color};
 }
 
 #main-menu {

@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 
 using ForServer.Data;
+using ForServer.Middleware;
 using ForServer.Model;
 using ForServer.Tiles;
 using kwd.BoxOBlazor.Demo.Model;
@@ -72,6 +73,8 @@ namespace ForServer
                 .AddScoped<Clipboard>();
 
             services.AddScoped<LocalStorage>();
+
+            services.AddScoped<ForwardPrefix>();
         }
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -85,11 +88,7 @@ namespace ForServer
 			else
 			{
 				app.UseExceptionHandler("/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
-			}
-
-            ConfigureLocalWASM(app);
+            }
 
 			app.UseHttpsRedirection();
 
@@ -116,45 +115,7 @@ namespace ForServer
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
-            app.Use((context, next) =>
-            {
-                if (context.Request.Headers.TryGetValue("X-Forwarded-PathBase", out var pathBases))
-                {
-                    context.Request.PathBase = pathBases.First();
-                }
-                return next();
-            });
-        }
-
-        private void ConfigureLocalWASM(IApplicationBuilder app)
-        {
-            var siteConfig = _configuration.GetSection(nameof(SiteConfig))
-                .Get<SiteConfig>();
-
-            if(string.IsNullOrWhiteSpace(siteConfig.WasmFileRoot)) return;
-            
-            //extra file types for blazor wasm support
-            var mimeTypes = new FileExtensionContentTypeProvider();
-            mimeTypes.Mappings[".dll"] = "application/octet-stream";
-            mimeTypes.Mappings[".dat"] = "application/octet-stream";
-
-            //if happen to be serving wasm from debug build.
-            mimeTypes.Mappings[".pdb"] = "application/octet-stream";
-
-            var wasmFiles = Path.Combine(
-                Directory.GetCurrentDirectory(), siteConfig.WasmFileRoot);
-
-            //serve up wasm static assets.
-            app.UseFileServer(new FileServerOptions
-            {
-                EnableDefaultFiles = true,
-                RequestPath = "/wasm",
-                StaticFileOptions =
-                {
-                    FileProvider = new PhysicalFileProvider(wasmFiles),
-                    ContentTypeProvider = mimeTypes
-                }
-            });
+            app.UseMiddleware<ForwardPrefix>();
         }
     }
 }

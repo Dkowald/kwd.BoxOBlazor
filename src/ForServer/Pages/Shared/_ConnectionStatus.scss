@@ -1,4 +1,4 @@
-﻿@back-color: aquamarine ;
+﻿$back-color: aquamarine ;
 
 #components-reconnect-modal {
     position: fixed;
@@ -10,7 +10,7 @@
     display: none;
     text-align: center;
     opacity: .8;
-    background-color: @back-color;
+    background-color: $back-color;
 
     &.components-reconnect-show,
     &.components-reconnect-failed,
@@ -23,7 +23,7 @@
         padding: 2em;
         font-weight: bolder;
         font-size: larger;
-        background-color: @back-color;
+        background-color: $back-color;
     }
 
     &.components-reconnect-show .components-reconnect-show {

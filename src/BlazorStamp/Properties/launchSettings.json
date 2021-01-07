@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "WasmStamp": {
-      "commandName": "Project",
-      "commandLineArgs": "--TargetPath=../ForBrowser/pub/wwwroot --BaseURL=\"wasm\"",
-      "workingDirectory": "./"
-    }
-  }
-}

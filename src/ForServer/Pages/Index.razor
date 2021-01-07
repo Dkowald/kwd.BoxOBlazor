@@ -1,11 +1,17 @@
 ﻿@page "/"
-@using ForServer.Tiles
+@using DemoAssets = kwd.BoxOBlazor.Demo.Assets;
+
+@inject IOptions<SiteConfig> siteConfig
 <TilePanel BasicTiles="@Items">
     <ChildContent>
         <Tile Title="About"
               Description="A developers playground for various experiments"
               OpenUrl="@($"/About")" />
-        
+        <Tile Title="SPA" 
+              Description="The single page app / progressive web app version"
+              OpenUrl="@siteConfig.Value.ForBrowserSite"
+        />
+
         <Tile Title="Blazor migration"
               OpenUrl="/Migration"
               Description="notes and samples to help migrate from blazor to razor" />
@@ -38,7 +44,7 @@
         <Tile Title="Alarm clock"
               Description="Demo richer blazor updates as a simple color tool"
               OpenUrl="@($"{DemoPath}/AlarmClock")"
-              IconUrl="/img/alarmClock.svg">
+              IconUrl="@DemoAssets.Img.AlarmClock">
         </Tile>
 
         <Tile Title="Local storage" OpenUrl="@($"{DemoPath}/LocalStorage")">
@@ -63,7 +69,7 @@
             Title = "Log viewer",
             Description = "View latest logging events",
             OpenUrl = $"{DemoPath}/LogView",
-            IconUrl = "_content/kwd.BoxOBlazor.Demo/img/log.svg"
+            IconUrl =  DemoAssets.Img.Log
         }
         };
 

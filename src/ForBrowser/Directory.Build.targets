@@ -34,4 +34,24 @@
 	        BeforeTargets="ResolveAssemblyReferences">
 		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
 	</Target>
+
+  <Target Name="RestoreLocalTools" AfterTargets="BeforeBuild">
+    <Exec Command="dotnet tool restore" StandardOutputImportance="High" />
+  </Target>
+
+  <PropertyGroup>
+    <WebCompilerConfig>webcompiler.json</WebCompilerConfig>
+    <WebCompilerConfig  Condition="'$(Configuration)' == 'Release'">webcompiler.Release.json</WebCompilerConfig>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <WebCompile Include="Web/css/forBrowser.scss" Out="wwwroot/css/forBrowser.css" />
+  </ItemGroup>
+
+  <Target Name="RunWebCompile" AfterTargets="RestoreLocalTools" Inputs="@(WebCompile);$(WebCompilerConfig)" Outputs="%(Out)">
+    <Message Importance="High" Text="Running webcompiler tool: "/>
+
+    <Exec Command="dotnet tool run webcompiler %(WebCompile.Identity) -c $(WebCompilerConfig)"
+          StandardOutputImportance="High" StandardErrorImportance="High" />
+  </Target>
 </Project>

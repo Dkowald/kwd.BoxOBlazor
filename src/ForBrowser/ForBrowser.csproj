@@ -1,38 +1,27 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RazorLangVersion>3.0</RazorLangVersion>
+    <TargetFramework>net5.0</TargetFramework>
 
     <!--Generate assets as a js file-->
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <UserSecretsId>4b884f9d-070a-4674-8502-d03042cbacc7</UserSecretsId>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug' ">
-    <!--Publish on build ( for debug)-->
-    <DeployOnBuild>true</DeployOnBuild>
-    <publishProfile>Local</publishProfile>
-  </PropertyGroup>
-  
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.1" PrivateAssets="all" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
+    
   </ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<!--Dont copy to out folder.-->
-		<Content Remove="compilerconfig.json" />
-    <None Include="compilerconfig.json" />
 		<Content Remove="wwwroot\appsettings.Development.json" />
 		<None Include="wwwroot\appsettings.Development.json" />
 	</ItemGroup>
@@ -46,5 +35,9 @@
 	  <ProjectReference Include="..\kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj" />
 	  <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
 	</ItemGroup>
-	
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+  
 </Project>
