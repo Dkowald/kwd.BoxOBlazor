@@ -7,20 +7,15 @@
 /src/**/*.user
 
 /src/kwd.BoxOBlazor.Demo/wwwroot/*
-/src/kwd.BoxOBlazor.Demo/Web/scripts/util/*.js
-/src/kwd.BoxOBlazor.Demo/Web/scripts/util/*.js.map
 
-/src/ForServer/wwwroot/*
-/src/ForServer/App_Data/*
-/src/ForServer/Properties/PublishProfiles/
+/src/kwd.BoxOBlazor.Server/wwwroot/*
+/src/kwd.BoxOBlazor.Server/App_Data/*
 
-/src/ForBrowser/wwwroot/*
-/src/ForBrowser/Properties/PublishProfiles*
-!/src/ForBrowser/Properties/PublishProfiles/Local.pubxml
-/src/ForBrowser/pub/
-/src/ForBrowser/web.config
+/src/kwd.BoxOBlazor.Browser/wwwroot/*
+/src/kwd.BoxOBlazor.Browser/web.config
 
 /src/**/.vscode/
 
+#Only keep the local publish profile.
 /src/**/PublishProfiles/*
 !/src/**/PublishProfiles/Local.pubxml

@@ -1,0 +1,46 @@
+﻿@inject NavigationManager _navManager;
+@inject TilesService _tiles;
+@implements IDisposable
+<div class="tile-nav @Active">
+    <a class="button @Active" href="@Url">
+        <i class="fas fa-layer-group"></i>Home
+    </a>
+</div>
+@code {
+    void IDisposable.Dispose()
+    {
+        _navManager.LocationChanged -= OnLocationChanged;
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        _navManager.LocationChanged += OnLocationChanged;
+
+        OnLocationChanged();
+
+        return base.OnInitializedAsync();
+    }
+
+    private bool IsAtRootUrl { get; set; } = true;
+
+    private string Active { get; set; } = "active";
+
+    private string Url { get; set; } = "";
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    => OnLocationChanged();
+
+    private void OnLocationChanged()
+    {
+        var originalIsAtRoot = IsAtRootUrl;
+
+        var path = _navManager.ToBaseRelativePath(_navManager.Uri).Trim('/');
+        IsAtRootUrl = string.Equals(path,_tiles.RootUrl, StringComparison.OrdinalIgnoreCase);
+
+        Active = IsAtRootUrl ? "active" : "";
+        Url = IsAtRootUrl ? "" : _tiles.RootUrl.ToString();
+
+        if (originalIsAtRoot != IsAtRootUrl)
+        { StateHasChanged(); }
+    }
+}

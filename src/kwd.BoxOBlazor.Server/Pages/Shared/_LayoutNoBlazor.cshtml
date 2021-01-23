@@ -1,0 +1,55 @@
+﻿@using kwd.BoxOBlazor.Demo
+@using kwd.BoxOBlazor.Hosting.Util
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="@Context.Request.GetBaseURL()" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BoxOBlazor - For Server</title>
+
+    @*Assets from share library*@
+    <link href="@Assets.Css.Iconic" rel="stylesheet" />
+    <link href="@Assets.Css.Site" rel="stylesheet" />
+    <script src="@Assets.Util" defer></script>
+
+    <link href="css/forServer.css" rel="stylesheet" />
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            padding: 1em .25em;
+        }
+
+        nav {
+            height: 2em;
+            background-color: bisque;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        nav a {
+            line-height: 2em;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+    </style>
+
+    @await RenderSectionAsync("Head", false)
+
+</head>
+<body>
+<nav>
+    <a href="~/">Home</a>
+</nav>
+<main class="main">
+    @RenderBody()
+</main>
+<partial name="_ConnectionStatus" />
+<partial name="_CircuitError"/>
+</body>
+</html>

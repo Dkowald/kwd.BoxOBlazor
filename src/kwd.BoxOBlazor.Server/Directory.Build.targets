@@ -1,0 +1,38 @@
+<Project>
+	<ItemGroup>
+		<WebAsset Include="Web/favicon.ico">
+			<Out>wwwroot/favicon.ico</Out>
+		</WebAsset>
+
+    <WebAsset Include="Web/img/**/*">
+      <Out>wwwroot/img/%(RecursiveDir)/%(Filename)%(Extension)</Out>
+    </WebAsset>
+	</ItemGroup>
+
+	<Target Name="WebAssets" Inputs="@(WebAsset)" Outputs="%(WebAsset -> WebAsset.Out)" 
+	        BeforeTargets="ResolveAssemblyReferences">
+		<Copy SourceFiles="%(WebAsset.FullPath)" DestinationFiles="%(Out)" />
+	</Target>
+
+  <Target Name="RestoreLocalTools" AfterTargets="BeforeBuild">
+    <Exec Command="dotnet tool restore" StandardOutputImportance="High" />
+  </Target>
+
+  <ItemGroup>
+    <WebCompile Include="Web/css/forServer.scss" Out="wwwroot/css/forServer.css" />
+    <WebCompile Include="Tiles/tiles.scss" Out="wwwroot/css/tiles.css" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <WebCompilerConfig>webcompiler.json</WebCompilerConfig>
+    <WebCompilerConfig  Condition="'$(Configuration)' == 'Release'">webcompiler.Release.json</WebCompilerConfig>
+  </PropertyGroup>
+
+  <Target Name="RunWebCompile" AfterTargets="RestoreLocalTools" Inputs="@(WebCompile);$(WebCompilerConfig)" Outputs="%(Out)">
+    <Message Importance="High" Text="Running webcompiler tool: "/>
+
+    <Exec Command="dotnet tool run webcompiler %(WebCompile.Identity) -c $(WebCompilerConfig)"
+          StandardOutputImportance="High" StandardErrorImportance="High" />
+  </Target>
+
+</Project>

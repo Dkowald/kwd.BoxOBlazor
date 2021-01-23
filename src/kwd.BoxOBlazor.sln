@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForServer", "ForServer\ForServer.csproj", "{14D47887-7487-4789-BDD7-2E5BD092F051}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForBrowser", "ForBrowser\ForBrowser.csproj", "{4A50301D-86EC-4F6C-940C-F3463D1CE3B1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26DAB011-0D4F-48EA-A13C-6BED30EBA5CA}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
@@ -23,12 +19,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor", "kwd.BoxOB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Demo", "kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj", "{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForBrowser.Host", "ForBrowser.Host\ForBrowser.Host.csproj", "{156129F3-1A73-4E7F-8318-F08A64DF3AB2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{ADEC37F4-CDBD-4F9C-A92C-F815003694E4}"
 	ProjectSection(SolutionItems) = preProject
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Hosting", "kwd.BoxOBlazor.Hosting\kwd.BoxOBlazor.Hosting.csproj", "{8B8F8BD9-ABBE-47B5-9C77-4FBF93AF1016}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Browser", "kwd.BoxOBlazor.Browser\kwd.BoxOBlazor.Browser.csproj", "{D1BBDD86-3B05-4167-BB9F-C06722B962C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Server", "kwd.BoxOBlazor.Server\kwd.BoxOBlazor.Server.csproj", "{9D34BF0B-AE6E-47F9-842B-CAC855C7FA01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.BoxOBlazor.Browser.Host", "kwd.BoxOBlazor.Browser.Host\kwd.BoxOBlazor.Browser.Host.csproj", "{1FC11CB1-F7F5-48FD-B3FF-A422F54C3DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +38,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14D47887-7487-4789-BDD7-2E5BD092F051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14D47887-7487-4789-BDD7-2E5BD092F051}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14D47887-7487-4789-BDD7-2E5BD092F051}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14D47887-7487-4789-BDD7-2E5BD092F051}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A50301D-86EC-4F6C-940C-F3463D1CE3B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A50301D-86EC-4F6C-940C-F3463D1CE3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A50301D-86EC-4F6C-940C-F3463D1CE3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A50301D-86EC-4F6C-940C-F3463D1CE3B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E0DCC1D-B9A5-45B7-A288-6F0EAD141122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E0DCC1D-B9A5-45B7-A288-6F0EAD141122}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E0DCC1D-B9A5-45B7-A288-6F0EAD141122}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,10 +50,22 @@ Global
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF73AD8-FD4D-406A-B928-D91C8BADA1D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{156129F3-1A73-4E7F-8318-F08A64DF3AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B8F8BD9-ABBE-47B5-9C77-4FBF93AF1016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B8F8BD9-ABBE-47B5-9C77-4FBF93AF1016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B8F8BD9-ABBE-47B5-9C77-4FBF93AF1016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B8F8BD9-ABBE-47B5-9C77-4FBF93AF1016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1BBDD86-3B05-4167-BB9F-C06722B962C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1BBDD86-3B05-4167-BB9F-C06722B962C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1BBDD86-3B05-4167-BB9F-C06722B962C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BBDD86-3B05-4167-BB9F-C06722B962C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D34BF0B-AE6E-47F9-842B-CAC855C7FA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D34BF0B-AE6E-47F9-842B-CAC855C7FA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D34BF0B-AE6E-47F9-842B-CAC855C7FA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D34BF0B-AE6E-47F9-842B-CAC855C7FA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC11CB1-F7F5-48FD-B3FF-A422F54C3DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC11CB1-F7F5-48FD-B3FF-A422F54C3DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC11CB1-F7F5-48FD-B3FF-A422F54C3DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC11CB1-F7F5-48FD-B3FF-A422F54C3DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

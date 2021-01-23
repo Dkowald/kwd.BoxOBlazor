@@ -1,0 +1,43 @@
+﻿@page
+@using kwd.BoxOBlazor.Server.Pages.Migration.Static
+<component type="typeof(Heading)" render-mode="Static"
+           param-Tagline="@("Multiple components with server pre-render")" />
+
+<p>
+    Unlike the simpler <a href="~/Migration/">static render</a>;
+    and <a href="~/Migration/SingComponent">single component demo</a>,
+    this mvc page includes multiple blazor components.
+</p>
+<p>
+    <b>This page is BROKEN</b>
+</p>
+<p>
+    Having multiple components (with pre-render) breaks the blazor browser code.
+</p>
+<section class="migration-section">
+    <h3>blazor component</h3>
+    <p>
+        JS Interop to collect data:
+        <component type="typeof(NamePrompt)" render-mode="ServerPrerendered" />
+    </p>
+    <p>
+        Up Time:
+        @(await Html.RenderComponentAsync<UpTime>(RenderMode.ServerPrerendered))
+        <component type="typeof(UpTime)" render-mode="ServerPrerendered" />
+    </p>
+</section>
+
+<p>
+    The above section contains multiple blazor components.
+    <br />
+    Here are 2 approaches to fix the problem:
+    <ul>
+        <li>
+            <a href="~/Migration/FixWithWrapper">Fix with wrapper</a>
+        </li>
+        <li>
+            <a href="~/Migration/FixWithRender">Fix with render</a>
+        </li>
+    </ul>
+
+</p>

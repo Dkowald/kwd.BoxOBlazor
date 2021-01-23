@@ -1,0 +1,38 @@
+﻿@page
+@using kwd.BoxOBlazor.Server.Pages
+@using kwd.BoxOBlazor.Hosting.Util
+@{Layout = null;}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="@Request.GetBaseURL()" />
+
+	<title>BoxOBlazor - ForServer</title>
+
+	<script src="_framework/blazor.server.js" defer></script>
+
+    @*My fonts*@
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    
+    @*Assets from common lib*@
+    <partial name="Shared/_BoxOBlazorAssets"/>
+    
+    @*My fa icons*@
+    <script src="https://kit.fontawesome.com/fabf6a7a00.js" crossorigin="anonymous"></script>
+    
+    @*styling for tile layout*@
+    <link href="css/tiles.css" type="text/css" rel="stylesheet"/>
+    
+    @*Site styles*@
+    <link href="css/forServer.css" type="text/css" rel="stylesheet" />
+</head>
+<body class="shell-wrap">
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <partial name="Shared/_CircuitError" />
+    <partial name="Shared/_ConnectionStatus" />
+</body>
+</html>
