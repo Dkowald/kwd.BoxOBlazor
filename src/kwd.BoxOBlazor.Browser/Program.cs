@@ -22,6 +22,10 @@ namespace kwd.BoxOBlazor.Browser
         /// <summary>
         /// endpoint for additional configuration from host service.
         /// </summary>
+        /// <remarks>
+        /// Since this is relative to the current site,
+        /// MUST also be sure to allow bypass in service-worker.offline
+        /// </remarks>
         public const string HostConfig = "HostConfig";
 
 		public static async Task Main(string[] args)

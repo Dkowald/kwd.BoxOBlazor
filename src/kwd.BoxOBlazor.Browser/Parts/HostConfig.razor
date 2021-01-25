@@ -1,0 +1,35 @@
+﻿<h3>HostConfig</h3>
+
+<p>
+    Out of the box a blazor web-app can consume <b>appsettings.json</b>
+    just like a normal (server side) asp.net app.
+</p>
+<p>
+    The difference being; <b>appsettings.config</b> is included as part of the browser app itself,
+    not served up from the hosting web server.
+</p>
+<p>
+    It can be quite useful to serve up config from the server. So this project includes a server-side config 
+    capability.
+</p>
+<p>
+    First, the host incudes an endpoint <b>~/HostConfig</b>, this returns the json object to be included as
+    configuration.
+</p>
+<p>
+    Next update the browser app to download and include this during startup.
+</p>
+
+<p>
+    That's the bulk of the problem. The last 'tricky-bit' is when the browser-app is running 
+    as a PWA (offline-mode). In this case, the browser-app uses <b>service-worker.offline.js</b>
+    to pre-load an offline cash. And since in my case, I'm using a same-site api endpoint; the blazor browser-app
+    attemts to use cached files rather than get it from server.
+</p>
+<p>
+    To fix this, update <b>service-worker.offline.js</b> to prefer a server download, with fallback to 
+    cache.
+</p>
+@code {
+
+}

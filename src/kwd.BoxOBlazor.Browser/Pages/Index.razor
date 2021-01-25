@@ -7,6 +7,14 @@
 
 Welcome to @config["Title"].
 
+<section>
+    Server backed config.
+    This blazor app runs in the browser.
+    But, on start it attempt to connect to the back-end host 
+    to retrieve additional settings via 
+    <a href="@Program.HostConfig">Host config url</a>.
+</section>
+
 
 @if (ShowForServerLink)
 {
@@ -18,6 +26,8 @@ Welcome to @config["Title"].
 }
 
 <ConfigEnvironment />
+
+<HostConfig />
 
 @code
 {
