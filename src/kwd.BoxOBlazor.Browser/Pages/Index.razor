@@ -13,7 +13,7 @@ Welcome to @config["Title"].
     <p>
         There is also a demo using
         blazor (server side)
-        <a href="@siteConfig.ForServerSite">here</a>.
+        <a href="@siteConfig.ServerURL">here</a>.
     </p>
 }
 
@@ -27,6 +27,6 @@ Welcome to @config["Title"].
     protected override void OnInitialized()
     {
         ShowForServerLink =
-            Uri.IsWellFormedUriString(siteConfig.ForServerSite, UriKind.RelativeOrAbsolute);
+            Uri.IsWellFormedUriString(siteConfig.ServerURL, UriKind.RelativeOrAbsolute);
     }
 }

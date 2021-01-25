@@ -40,6 +40,11 @@ namespace kwd.BoxOBlazor.Hosting.Config
             if (proxyConfig.Addresses.Any())
             {
                 log.LogInformation("Configuring accepted reverse proxies");
+                
+                //reset any existing
+                cfg.KnownNetworks.Clear();
+                cfg.KnownProxies.Clear();
+
                 foreach (var address in proxyConfig.Addresses)
                 {
                     var ip = IPAddress.Parse(address);
@@ -47,9 +52,6 @@ namespace kwd.BoxOBlazor.Hosting.Config
                     cfg.KnownProxies.Add(ip);
                 }
             }
-            
-            cfg.KnownNetworks.Clear();
-            cfg.KnownProxies.Clear();
 
             app.UseForwardedHeaders(cfg);
 

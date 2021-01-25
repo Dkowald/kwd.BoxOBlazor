@@ -27,10 +27,5 @@
 	  <ProjectReference Include="..\kwd.BoxOBlazor.Hosting\kwd.BoxOBlazor.Hosting.csproj" />
 	  <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
 	</ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="app_data\" />
-    <Folder Include="Model\" />
-  </ItemGroup>
   
 </Project>

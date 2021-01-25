@@ -23,9 +23,17 @@
 	<ItemGroup>
 		<!--Dont copy to out folder.-->
 		<Content Remove="webcompiler.json" />
-		<Content Remove="wwwroot\appsettings.Development.json" />
-		<None Include="webcompiler.json" />
+    <None Include="webcompiler.json" />
+
+    <Content Remove="webcompiler.Release.json" />
+    <None Include="webcompiler.Release.json" />
+
+    <Content Remove="Web\sample-data\weather.json" />
+		<None Include="Web\sample-data\weather.json" />
+
+    <Content Remove="wwwroot\appsettings.Development.json" />
 		<None Include="wwwroot\appsettings.Development.json" />
+    
 	</ItemGroup>
 
   <ItemGroup>

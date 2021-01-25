@@ -18,10 +18,17 @@
 
 	<ItemGroup>
 		<!--Dont copy to out folder.-->
-		<None Remove="Web\scripts\util\Clipboard.ts" />
+		<!--<None Remove="Web\scripts\util\Clipboard.ts" />
 		<None Remove="Web\scripts\util\EnrichError.ts" />
 		<None Remove="Web\scripts\util\LocalStorage.ts" />
-		<None Remove="Web\scripts\util\util.ts" />
+		<None Remove="Web\scripts\util\util.ts" />-->
+	</ItemGroup>
+
+	<ItemGroup>
+    <Content Remove="webcompiler.json" />
+    <Content Remove="webcompiler.Release.json" />
+    <None Include="webcompiler.json" />
+	  <None Include="webcompiler.Release.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -29,9 +36,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <Content Update="Web\scripts\util\tsconfig.json">
-      <Pack>false</Pack>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  <Content Update="Web\scripts\util\tsconfig.json">
+	    <Pack>false</Pack>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
 	  </Content>
 	</ItemGroup>
 </Project>

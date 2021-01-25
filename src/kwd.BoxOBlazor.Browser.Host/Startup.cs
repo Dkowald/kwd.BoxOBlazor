@@ -1,15 +1,12 @@
-using System.Linq;
-using System.Net;
+using kwd.BoxOBlazor.Browser.Model;
 using kwd.BoxOBlazor.Hosting.Config;
 using kwd.BoxOBlazor.Hosting.Middleware;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace kwd.BoxOBlazor.Browser.Host
 {
@@ -24,6 +21,8 @@ namespace kwd.BoxOBlazor.Browser.Host
         public void ConfigureServices(IServiceCollection services)
         {
             new SetupReversProxy().ConfigureServices(services, _config);
+
+            services.Configure<SiteConfig>(_config.GetSection(nameof(SiteConfig)));
 
             services.AddRazorPages();
 
@@ -52,9 +51,10 @@ namespace kwd.BoxOBlazor.Browser.Host
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
-
-                endpoints.MapFallbackToPage("/Index");
+                
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }
