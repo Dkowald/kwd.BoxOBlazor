@@ -11,10 +11,6 @@
 <p>This blazor wasm app is running in <span>@env.Environment</span>.</p>
 
 <p>
-    This site uses <Link Target="@links["nginx"]" /> as the external (port-80) facing proxy.
-    To configure the executing environemnt,
-</p>
-<p>
     As per <Link Target="ConfigDoc" />,
     the environment is described via a custom http header: <em>blazor-environment</em>.
     When published, a blazor wasm site incudes <em>_framework/blazor.boot.json</em> to
@@ -25,7 +21,9 @@
     At this point the header is used to define the environment.
 </p>
 
-
+<p>
+    For example, to setup using a <Link Target="@links["nginx"]" /> reverse proxy.
+</p>
 <pre><i @onclick="CopyToClipboard" class="oi oi-clipboard" title="copy to clipboard" aria-hidden="true"></i>
 <code @ref="FragmentElement">@NginxFragment</code>
 </pre>
@@ -52,7 +50,4 @@
 
     private ExternalLink ConfigDoc = new ExternalLink("blazor docs",
     "https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/environments?view=aspnetcore-3.1");
-
-
-
 }

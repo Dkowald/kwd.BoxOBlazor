@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using kwd.BoxOBlazor.Browser.Model;
@@ -69,18 +70,29 @@ namespace kwd.BoxOBlazor.Browser
 
         static async Task AddHostConfiguration(WebAssemblyHostBuilder builder, HttpClient client)
         {
+            var jsonType = new MediaTypeWithQualityHeaderValue("application/json");
             //host provided config.
-            var cfgResp = await client.GetAsync(HostConfig);
+            var jsonGet = new HttpClient
+            {
+                BaseAddress = client.BaseAddress
+            };
+            jsonGet.DefaultRequestHeaders.Accept
+                .Add(jsonType);
+
+            var cfgResp = await jsonGet.GetAsync(HostConfig);
             if (cfgResp.IsSuccessStatusCode)
             {
-                try
-                {
-                    builder.Configuration.AddJsonStream(await cfgResp.Content.ReadAsStreamAsync());
-                }
-                catch (JsonException ex)
-                {
-                    throw new ApplicationException("Error reading host config", ex);
-                }
+                var isJson = jsonType.Equals(cfgResp.Content.Headers.ContentType);
+                
+                if(isJson)
+                    try
+                    {
+                        builder.Configuration.AddJsonStream(await cfgResp.Content.ReadAsStreamAsync());
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new ApplicationException("Error reading host config", ex);
+                    }
             }
         }
     }

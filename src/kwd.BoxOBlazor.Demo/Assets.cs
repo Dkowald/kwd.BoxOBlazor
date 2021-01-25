@@ -7,11 +7,11 @@
     {
         private static string Base = "_content/kwd.BoxOBlazor.Demo";
 
-        public static string Util = Base + "util.js";
+        public static string Util = Base + "/util.js";
 
         public static class Css
         {
-            public static string Site = Base + "/site.css";
+            public static string Site = Base + "/css/site.css";
             public static string Bootstrap = Base + "/css/bootstrap/bootstrap.min.css";
             public static string Iconic = Base + "/css/open-iconic/font/css/open-iconic-bootstrap.min.css";
         }
