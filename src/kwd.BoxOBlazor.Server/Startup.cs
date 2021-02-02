@@ -30,10 +30,9 @@ namespace kwd.BoxOBlazor.Server
 		
 		public void ConfigureServices(IServiceCollection services)
         {
-            new SetupReversProxy().ConfigureServices(services, _configuration);
+            services.AddReverseProxy(_configuration);
 
-            services
-                .AddLogging(cfg =>
+            services.AddLogging(cfg =>
                 {
                     cfg.AddMemoryLogger();
 
@@ -75,7 +74,7 @@ namespace kwd.BoxOBlazor.Server
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            new SetupReversProxy().Configure(app);
+            app.UseReverseProxy();
             
             if (env.IsDevelopment())
 			{

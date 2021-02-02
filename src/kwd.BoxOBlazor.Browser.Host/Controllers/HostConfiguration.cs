@@ -1,5 +1,5 @@
 ﻿using kwd.BoxOBlazor.Browser.Model;
-
+using kwd.BoxOBlazor.Browser.Services.HostSettings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -23,7 +23,7 @@ namespace kwd.BoxOBlazor.Browser.Host.Controllers
     /// actual config data to only the bits for the browser app.
     /// </remarks>
     [ApiController]
-    [Route(Browser.Program.HostConfig)]
+    [Route(HostSettingsSetup.HostConfig)]
     public class HostConfiguration : ControllerBase
     {
         private readonly IOptions<SiteConfig> _config;

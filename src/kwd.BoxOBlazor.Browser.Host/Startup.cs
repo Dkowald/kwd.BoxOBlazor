@@ -20,7 +20,7 @@ namespace kwd.BoxOBlazor.Browser.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
-            new SetupReversProxy().ConfigureServices(services, _config);
+            services.AddReverseProxy(_config);
 
             services.Configure<SiteConfig>(_config.GetSection(nameof(SiteConfig)));
 
@@ -29,10 +29,9 @@ namespace kwd.BoxOBlazor.Browser.Host
             services.AddForwardBasePath();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            new SetupReversProxy().Configure(app);
+            app.UseReverseProxy();
             
             if (env.IsDevelopment())
             {

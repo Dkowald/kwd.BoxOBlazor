@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using Microsoft.Extensions.Configuration
+@using kwd.BoxOBlazor.Browser.Services.HostSettings
 @inject IConfiguration config;
 @inject SiteConfig siteConfig;
 
@@ -12,7 +13,7 @@ Welcome to @config["Title"].
     This blazor app runs in the browser.
     But, on start it attempt to connect to the back-end host 
     to retrieve additional settings via 
-    <a href="@Program.HostConfig">Host config url</a>.
+    <a href="@HostSettingsSetup.HostConfig">Host config url</a>.
 </section>
 
 
