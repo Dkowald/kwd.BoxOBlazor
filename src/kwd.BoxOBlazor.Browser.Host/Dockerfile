@@ -5,12 +5,17 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS buildPrep
 #typescript needs node.
 RUN apt-get update
 RUN apt-get install -y npm
 WORKDIR /src
+COPY NuGet.Config .
+
+FROM buildPrep AS build
+WORKDIR /src
 COPY ["kwd.BoxOBlazor.Browser.Host/kwd.BoxOBlazor.Browser.Host.csproj", "kwd.BoxOBlazor.Browser.Host/"]
+COPY ["kwd.BoxOBlazor.Browser/kwd.BoxOBlazor.Browser.csproj", "kwd.BoxOBlazor.Browser/"]
 RUN dotnet restore "kwd.BoxOBlazor.Browser.Host/kwd.BoxOBlazor.Browser.Host.csproj"
 COPY . .
 WORKDIR "/src/kwd.BoxOBlazor.Browser.Host"

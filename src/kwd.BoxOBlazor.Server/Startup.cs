@@ -3,12 +3,10 @@ using kwd.BoxOBlazor.Demo.Services.MemLog;
 using kwd.BoxOBlazor.Demo.Services.Time;
 using kwd.BoxOBlazor.Demo.util;
 using kwd.BoxOBlazor.Demo.util.ClientSideStorage;
-using kwd.BoxOBlazor.Hosting.Config;
-using kwd.BoxOBlazor.Hosting.Middleware;
 using kwd.BoxOBlazor.Server.Config;
 using kwd.BoxOBlazor.Server.Data;
 using kwd.BoxOBlazor.Server.Tiles;
-
+using kwd.WebCore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Hosting;
@@ -68,8 +66,6 @@ namespace kwd.BoxOBlazor.Server
                 .AddScoped<Clipboard>();
 
             services.AddScoped<LocalStorage>();
-
-            services.AddForwardBasePath();
         }
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

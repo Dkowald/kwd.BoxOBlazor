@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="kwd.WebCore" Version="0.1.1-beta1" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,7 +25,6 @@
 
   <ItemGroup>
 	  <ProjectReference Include="..\kwd.BoxOBlazor.Demo\kwd.BoxOBlazor.Demo.csproj" />
-	  <ProjectReference Include="..\kwd.BoxOBlazor.Hosting\kwd.BoxOBlazor.Hosting.csproj" />
 	  <ProjectReference Include="..\kwd.BoxOBlazor\kwd.BoxOBlazor.csproj" />
 	</ItemGroup>
   

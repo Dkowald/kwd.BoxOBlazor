@@ -1,6 +1,5 @@
 using kwd.BoxOBlazor.Browser.Model;
-using kwd.BoxOBlazor.Hosting.Config;
-using kwd.BoxOBlazor.Hosting.Middleware;
+using kwd.WebCore.Services;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,8 +24,6 @@ namespace kwd.BoxOBlazor.Browser.Host
             services.Configure<SiteConfig>(_config.GetSection(nameof(SiteConfig)));
 
             services.AddRazorPages();
-
-            services.AddForwardBasePath();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

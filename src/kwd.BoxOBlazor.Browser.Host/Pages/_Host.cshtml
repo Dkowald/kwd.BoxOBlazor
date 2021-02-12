@@ -1,5 +1,4 @@
 ﻿@page
-@using kwd.BoxOBlazor.Hosting.Util
 @*This is a copy of index.html from the razor app.
   Use this so server gets chance for some updates,
     in particular the base url needs to be set.*@
@@ -7,7 +6,7 @@
 <html>
 <head>
     @*Host updates base*@ 
-    <base href="@Request.GetBaseURL()" />
+    <base href="@Request.GetBaseUrl()" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />

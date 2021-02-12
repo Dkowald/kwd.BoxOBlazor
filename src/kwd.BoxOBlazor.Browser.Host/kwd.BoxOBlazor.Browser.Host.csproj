@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="kwd.WebCore" Version="0.1.1-beta1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
@@ -18,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\kwd.BoxOBlazor.Browser\kwd.BoxOBlazor.Browser.csproj" />
-    <ProjectReference Include="..\kwd.BoxOBlazor.Hosting\kwd.BoxOBlazor.Hosting.csproj" />
   </ItemGroup>
 
 </Project>
